@@ -6,3 +6,6 @@ def index(request):
 
 def login_view(request):
     return render(request, 'login.html')
+
+def user(request):
+    return render(request, 'user.html')

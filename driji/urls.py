@@ -6,6 +6,7 @@ import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^zkcluster/', include('zkcluster.urls', namespace='zkcluster')),
-    url(r'^$', views.index),
-    url(r'^login/$', views.login_view)
+    url(r'^$', views.index, name='index'),
+    url(r'^login/$', views.login_view),
+    url(r'^user/$', views.user, name='user')
 ]
