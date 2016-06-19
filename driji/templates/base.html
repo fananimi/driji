@@ -108,19 +108,20 @@
                     <span class="icon fa fa-tachometer"></span><span class="title">Dashboard</span>
                   </a>
                 </li>
+                <li {% if request.path == '/terminal/' %}class="active"{% endif %}>
+                  <a href="{% url 'terminal' %}">
+                    <span class="icon fa fa-hdd-o"></span><span class="title">Terminal</span>
+                  </a>
+                </li>
                 <li {% if request.path == '/user/' %}class="active"{% endif %}>
                   <a href="{% url 'user' %}">
                     <span class="icon fa fa-users"></span><span class="title">User Management</span>
                   </a>
                 </li>
-                <!-- Dropdown-->
-
-                <!-- Dropdown-->
                 <li class="panel panel-default dropdown">
                   <a data-toggle="collapse" href="#dropdown-icon">
                     <span class="icon fa fa-envelope"></span><span class="title">SMS</span>
                   </a>
-                  <!-- Dropdown level 1 -->
                   <div id="dropdown-icon" class="panel-collapse collapse">
                     <div class="panel-body">
                       <ul class="nav navbar-nav">
