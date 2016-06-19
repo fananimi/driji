@@ -1,5 +1,6 @@
 from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 from django.shortcuts import render, redirect
 
 from .forms import LoginForm
@@ -23,6 +24,12 @@ def login_view(request):
         return redirect(request.META.get('HTTP_REFERER'))
 
     return render(request, 'login.html', {'form': form})
+
+def logout_views(request):
+    if not request.user.is_authenticated():
+        raise Http404()
+    logout(request)
+    return redirect('index')
 
 @login_required
 def user(request):

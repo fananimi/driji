@@ -120,6 +120,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 LOGIN_URL = '/login/'
+LOGOUT_URL = '/logout/'
 
 try:
     from settings_local import *
