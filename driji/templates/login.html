@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Flat Admin V.2 - Free Bootstrap Admin Templates</title>
+    <title>Driji - Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% include 'css.html' %}
   </head>
@@ -21,12 +21,17 @@
                     Log In...
                   </div>
                 </div>
-                <form>
+                <form method="POST" action="">
+                  {% csrf_token %}
+                  <span class="error">
+                    {{ form.identifier.errors.0 }}
+                  <span>
                   <div class="control">
-                    <input type="text" class="form-control" value="admin@gmail.com" />
+                    {{ form.identifier }}
                   </div>
+                  {{ form.password.errors.0 }}
                   <div class="control">
-                    <input type="password" class="form-control" value="123456" />
+                    {{ form.password }}
                   </div>
                   <div class="login-button text-center">
                     <input type="submit" class="btn btn-primary" value="Login">
