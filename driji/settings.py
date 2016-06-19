@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-from django.utils.translation import ugettext_lazy as _
 
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 BASE_DIR = os.path.dirname(APP_DIR)
@@ -99,8 +98,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
 LANGUAGES = [
-  ('id', _('Bahasa Indonesia')),
-  ('en', _('English')),
+  ('id', 'Bahasa Indonesia'),
+  ('en', 'English'),
 ]
 
 LANGUAGE_CODE = 'en-us'

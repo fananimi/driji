@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-19 08:57+0000\n"
+"POT-Creation-Date: 2016-06-19 09:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,6 +18,22 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#: driji/forms.py:10
+msgid "Username or Email"
+msgstr "Nama pengguna atau email"
+
+#: driji/forms.py:16
+msgid "Password"
+msgstr "Kata Sandi"
+
+#: driji/forms.py:29
+msgid "User does not exists"
+msgstr "Pengguna tidak ditemukan"
+
+#: driji/forms.py:43
+msgid "Incorrect password"
+msgstr "Password tidak benar"
+
 #: driji/models.py:7
 msgid "name"
 msgstr "nama"
@@ -26,15 +42,7 @@ msgstr "nama"
 msgid "phone"
 msgstr "telepon"
 
-#: driji/settings.py:102
-msgid "Bahasa Indonesia"
-msgstr ""
-
-#: driji/settings.py:103
-msgid "English"
-msgstr ""
-
-#: driji/templates/base.html:22 driji/templates/base.html:136
+#: driji/templates/base.html:22 driji/templates/base.html:138
 msgid "Dashboard"
 msgstr "Dasbor"
 
@@ -70,35 +78,35 @@ msgstr "lihat semua"
 msgid "Profile"
 msgstr "Profil"
 
-#: driji/templates/base.html:110
+#: driji/templates/base.html:111
 msgid "Logout"
 msgstr "Keluar"
 
-#: driji/templates/base.html:141 driji/templates/terminal.html:11
+#: driji/templates/base.html:143 driji/templates/terminal.html:11
 msgid "Terminal"
 msgstr "Terminal"
 
-#: driji/templates/base.html:146
+#: driji/templates/base.html:148
 msgid "User Management"
 msgstr "Pengaturan Pengguna"
 
-#: driji/templates/base.html:151
+#: driji/templates/base.html:153
 msgid "SMS"
 msgstr "Pesan Singkat"
 
-#: driji/templates/base.html:158
+#: driji/templates/base.html:160
 msgid "Compose Message"
 msgstr "Tulis Pesan"
 
-#: driji/templates/base.html:163
+#: driji/templates/base.html:165
 msgid "Inbox"
 msgstr "Kotak Masuk"
 
-#: driji/templates/base.html:168
+#: driji/templates/base.html:170
 msgid "Outbox"
 msgstr "Kotak Keluar"
 
-#: driji/templates/base.html:186
+#: driji/templates/base.html:188
 msgid "Copyright"
 msgstr "Hak Cipta"
 
