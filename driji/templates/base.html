@@ -18,7 +18,9 @@
                 <i class="fa fa-bars icon"></i>
               </button>
               <ol class="breadcrumb navbar-breadcrumb">
-                <li class="active">Dashboard</li>
+                <li class="active">
+                  {% trans 'Dashboard' %}
+                </li>
               </ol>
               <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
                 <i class="fa fa-th icon"></i>
@@ -29,7 +31,7 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-language"></i></a>
                 <ul class="dropdown-menu animated fadeInDown">
                   <li class="title">
-                    Select Language
+                    {% trans 'Select Language' %}
                   </li>
                   <li>
                     <ul class="list-group notifications">
@@ -54,10 +56,10 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-comments-o"></i></a>
                 <ul class="dropdown-menu animated fadeInDown">
                   <li class="title">
-                    Notification <span class="badge pull-right">0</span>
+                    {% trans 'Notification' %} <span class="badge pull-right">0</span>
                   </li>
                   <li class="message">
-                    No new notification
+                    {% trans 'No new notification' %}
                   </li>
                 </ul>
               </li>
@@ -65,28 +67,28 @@
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-star-half-o"></i> 4</a>
                 <ul class="dropdown-menu danger  animated fadeInDown">
                   <li class="title">
-                    Notification <span class="badge pull-right">4</span>
+                    {% trans 'Notification' %} <span class="badge pull-right">4</span>
                   </li>
                   <li>
                     <ul class="list-group notifications">
                       <a href="#">
                         <li class="list-group-item">
-                          <span class="badge">1</span> <i class="fa fa-exclamation-circle icon"></i> new registration
+                          <span class="badge">1</span> <i class="fa fa-exclamation-circle icon"></i> {% trans 'new registration' %}
                         </li>
                       </a>
                       <a href="#">
                         <li class="list-group-item">
-                          <span class="badge success">1</span> <i class="fa fa-check icon"></i> new orders
+                          <span class="badge success">1</span> <i class="fa fa-check icon"></i> {% trans 'new orders' %}
                         </li>
                       </a>
                       <a href="#">
                         <li class="list-group-item">
-                          <span class="badge danger">2</span> <i class="fa fa-comments icon"></i> customers messages
+                          <span class="badge danger">2</span> <i class="fa fa-comments icon"></i> {% trans 'customers messages' %}
                         </li>
                       </a>
                       <a href="#">
                         <li class="list-group-item message">
-                          view all
+                          {% trans 'view all' %}
                         </li>
                       </a>
                     </ul>
@@ -104,8 +106,8 @@
                       <h4 class="username">Emily Hart</h4>
                       <p>emily_hart@email.com</p>
                       <div class="btn-group margin-bottom-2x" role="group">
-                        <button type="button" class="btn btn-default"><i class="fa fa-user"></i> Profile</button>
-                        <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i> Logout</button>
+                        <button type="button" class="btn btn-default"><i class="fa fa-user"></i> {% trans 'Profile' %}</button>
+                        <button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i> {% trans 'Logout' %}</button>
                       </div>
                     </div>
                   </li>
@@ -131,39 +133,39 @@
               <ul class="nav navbar-nav">
                 <li {% if request.path == '/' %}class="active"{% endif %}>
                   <a href="{% url 'index' %}">
-                    <span class="icon fa fa-tachometer"></span><span class="title">Dashboard</span>
+                    <span class="icon fa fa-tachometer"></span><span class="title">{% trans 'Dashboard' %}</span>
                   </a>
                 </li>
                 <li {% if request.path == '/terminal/' %}class="active"{% endif %}>
                   <a href="{% url 'terminal' %}">
-                    <span class="icon fa fa-hdd-o"></span><span class="title">Terminal</span>
+                    <span class="icon fa fa-hdd-o"></span><span class="title">{% trans 'Terminal' %}</span>
                   </a>
                 </li>
                 <li {% if request.path == '/user/' %}class="active"{% endif %}>
                   <a href="{% url 'user' %}">
-                    <span class="icon fa fa-users"></span><span class="title">User Management</span>
+                    <span class="icon fa fa-users"></span><span class="title">{% trans 'User Management' %}</span>
                   </a>
                 </li>
                 <li class="panel panel-default dropdown">
                   <a data-toggle="collapse" href="#dropdown-icon">
-                    <span class="icon fa fa-envelope"></span><span class="title">SMS</span>
+                    <span class="icon fa fa-envelope"></span><span class="title">{% trans 'SMS' %}</span>
                   </a>
                   <div id="dropdown-icon" class="panel-collapse collapse">
                     <div class="panel-body">
                       <ul class="nav navbar-nav">
                         <li>
                           <a href="icons/glyphicons.html">
-                            <span class="icon fa fa-pencil"></span><span class="title">Compose Message</span>
+                            <span class="icon fa fa-pencil"></span><span class="title">{% trans 'Compose Message' %}</span>
                           </a>
                         </li>
                         <li>
                           <a href="icons/glyphicons.html">
-                            <span class="icon fa fa-inbox"></span><span class="title">Inbox</span>
+                            <span class="icon fa fa-inbox"></span><span class="title">{% trans 'Inbox' %}</span>
                           </a>
                         </li>
                         <li>
                           <a href="icons/glyphicons.html">
-                            <span class="icon fa fa-paper-plane"></span><span class="title">Outbox</span>
+                            <span class="icon fa fa-paper-plane"></span><span class="title">{% trans 'Outbox' %}</span>
                           </a>
                         </li>
                       </ul>
@@ -181,7 +183,7 @@
       </div>
       <footer class="app-footer">
         <div class="wrapper">
-          <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> © 2015 Copyright.
+          <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> {% trans 'Copyright' %} © 2015.
         </div>
       </footer>
     <div>
