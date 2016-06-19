@@ -184,10 +184,12 @@
         <div class="container-fluid">
           <div class="side-body padding-top">
             <div>
-              <div class="alert alert-warning alert-dismissible" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
-                <strong>Warning!</strong> Better check yourself, you're not looking too good.
-              </div>
+              {% for message in messages %}
+                <div class="alert alert-{% if message.tags == "error" %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">×</span></button>
+                  {{ message }}
+                </div>
+              {% endfor %}
             </div>
             {% block content %}{% endblock %}
           </div>

@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
@@ -21,6 +22,7 @@ def login_view(request):
     if request.POST and form.is_valid():
         authenticate_user = form.get_authenticate_user()
         login(request, authenticate_user)
+        messages.add_message(request, messages.SUCCESS, "Welcome {} !".format(request.user.username))
         return redirect(request.META.get('HTTP_REFERER'))
 
     return render(request, 'login.html', {'form': form})
