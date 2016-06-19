@@ -9,3 +9,6 @@ def login_view(request):
 
 def user(request):
     return render(request, 'user.html')
+
+def terminal(request):
+    return render(request, 'terminal.html')
