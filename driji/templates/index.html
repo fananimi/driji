@@ -1,5 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb navbar-breadcrumb">
+  <li class="active">
+    {% trans 'Dashboard' %}
+  </li>
+</ol>
+{% endblock %}
 
 {% block content %}
 <div class="row">

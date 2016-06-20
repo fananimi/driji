@@ -2,14 +2,21 @@ from django.contrib import messages
 from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.translation import ugettext as _
+from django.views.decorators.http import require_http_methods as alowed
 
-from .forms import LoginForm
+from zk.exception import ZKError
+from zkcluster.models import Terminal
 
+from .forms import LoginForm, ScanTerminalForm, AddTerminalForm, EditTerminalForm
+
+@alowed(['GET'])
 @login_required
 def index(request):
     return render(request, 'index.html')
 
+@alowed(['GET', 'POST'])
 def login_view(request):
     user = request.user
     if user.is_authenticated():
@@ -27,16 +34,171 @@ def login_view(request):
 
     return render(request, 'login.html', {'form': form})
 
+@alowed(['GET'])
 def logout_views(request):
     if not request.user.is_authenticated():
         raise Http404()
     logout(request)
     return redirect('index')
 
+@alowed(['GET'])
 @login_required
 def user(request):
     return render(request, 'user.html')
 
+@alowed(['GET'])
 @login_required
 def terminal(request):
-    return render(request, 'terminal.html')
+    terminals = Terminal.objects.all()
+    data = {
+        'terminals': terminals
+    }
+    return render(request, 'terminal.html', data)
+
+@alowed(['POST'])
+@login_required
+def terminal_add(request):
+    connected = request.GET.get('connected')
+    if connected:
+        form = AddTerminalForm(request.POST or None, {'validate_name': True})
+        if form.is_valid():
+            try:
+                form.save()
+                messages.add_message(request, messages.SUCCESS, _('Successfully registering a new terminal'))
+                return redirect('terminal')
+            except ZKError, e:
+                messages.add_message(request, messages.ERROR, str(e))
+    else:
+        form = AddTerminalForm(request.POST or None)
+
+    data = {
+        'form': form
+    }
+    return render(request, 'terminal_add.html', data)
+
+@alowed(['GET', 'POST'])
+def terminal_scan(request):
+    form = ScanTerminalForm(request.POST or None)
+    if request.POST and form.is_valid():
+        ip = form.cleaned_data['ip']
+        port = form.cleaned_data['port']
+
+        terminal = Terminal(
+            ip=ip,
+            port=port
+        )
+        try:
+            terminal.zk_connect()
+            sn = terminal.zk_getserialnumber()
+
+            # manipulate the POST information
+            mutable = request.POST._mutable
+            request.POST._mutable = True
+            request.POST['serialnumber'] = sn
+            request.POST._mutable = mutable
+
+            terminal.zk_disconnect()
+            return terminal_add(request)
+        except ZKError, e:
+            messages.add_message(request, messages.ERROR, str(e))
+
+    data = {
+        'form': form
+    }
+
+    return render(request, 'terminal_scan.html', data)
+
+@alowed(['GET', 'POST'])
+@login_required
+def terminal_edit(request, terminal_id):
+    terminal = get_object_or_404(Terminal, pk=terminal_id)
+    form = EditTerminalForm(request.POST or None, instance=terminal)
+    if request.POST and form.is_valid():
+        try:
+            form.save()
+            messages.add_message(request, messages.SUCCESS, _('Successfully updating a terminal'))
+        except ZKError, e:
+            messages.add_message(request, messages.ERROR, str(e))
+        return redirect('terminal')
+    data = {
+        'terminal': terminal,
+        'form': form
+    }
+    return render(request, 'terminal_edit.html', data)
+
+@alowed(['POST'])
+def terminal_restart(request, terminal_id):
+    terminal = get_object_or_404(Terminal, pk=terminal_id)
+    try:
+        terminal.zk_connect()
+        terminal.zk_restart()
+        messages.add_message(request, messages.SUCCESS, _('%(terminal)s has restarted') % {'terminal': terminal})
+    except ZKError, e:
+        messages.add_message(request, messages.ERROR, str(e))
+
+    return redirect('terminal')
+
+@alowed(['POST'])
+def terminal_poweroff(request, terminal_id):
+    terminal = get_object_or_404(Terminal, pk=terminal_id)
+    try:
+        terminal.zk_connect()
+        terminal.zk_poweroff()
+        terminal.zk_disconnect()
+        messages.add_message(request, messages.SUCCESS, _('%(terminal)s has shutdown') % {'terminal': terminal})
+    except ZKError, e:
+        messages.add_message(request, messages.ERROR, str(e))
+
+    return redirect('terminal')
+
+@alowed(['POST'])
+def terminal_voice(request, terminal_id):
+    terminal = get_object_or_404(Terminal, pk=terminal_id)
+    try:
+        terminal.zk_connect()
+        terminal.zk_voice()
+        terminal.zk_disconnect()
+    except ZKError, e:
+        messages.add_message(request, messages.ERROR, str(e))
+
+    return redirect('terminal')
+
+@alowed(['POST'])
+def terminal_format(request, terminal_id):
+    terminal = get_object_or_404(Terminal, pk=terminal_id)
+    try:
+        terminal.format()
+        messages.add_message(request, messages.SUCCESS, _('%(terminal)s has formated') % {'terminal': terminal})
+    except ZKError, e:
+        messages.add_message(request, messages.ERROR, str(e))
+
+    return redirect('terminal')
+
+@alowed(['POST'])
+def terminal_delete(request, terminal_id):
+    terminal = get_object_or_404(Terminal, pk=terminal_id)
+    try:
+        terminal.delete()
+        messages.add_message(request, messages.SUCCESS, _('%(terminal)s has deleted') % {'terminal': terminal})
+    except ZKError, e:
+        messages.add_message(request, messages.ERROR, str(e))
+
+    return redirect('terminal')
+
+@alowed(['GET', 'POST'])
+@login_required
+def terminal_action(request, action, terminal_id):
+    if action == 'edit':
+        return terminal_edit(request, terminal_id)
+    elif action == 'restart':
+        return terminal_restart(request, terminal_id)
+    elif action == 'poweroff':
+        return terminal_poweroff(request, terminal_id)
+    elif action == 'voice':
+        return terminal_voice(request, terminal_id)
+    elif action == 'format':
+        return terminal_format(request, terminal_id)
+    elif action == 'delete':
+        return terminal_delete(request, terminal_id)
+    else:
+        raise Http404("Action doest not allowed")

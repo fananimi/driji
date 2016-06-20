@@ -14,6 +14,10 @@ body {
   color: red;
 }
 
+a.center {
+  text-align: center;
+}
+
 .row > [class*="col-"] {
   margin-bottom: 25px; }
 

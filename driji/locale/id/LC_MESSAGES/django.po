@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-19 09:25+0000\n"
+"POT-Creation-Date: 2016-06-20 04:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,21 +18,60 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: driji/forms.py:10
+#: driji/forms.py:12
 msgid "Username or Email"
 msgstr "Nama pengguna atau email"
 
-#: driji/forms.py:16
+#: driji/forms.py:18
 msgid "Password"
 msgstr "Kata Sandi"
 
-#: driji/forms.py:29
+#: driji/forms.py:31
 msgid "User does not exists"
 msgstr "Pengguna tidak ditemukan"
 
-#: driji/forms.py:43
+#: driji/forms.py:45
 msgid "Incorrect password"
 msgstr "Password tidak benar"
+
+#: driji/forms.py:61 driji/forms.py:127 driji/forms.py:161
+msgid "IP Address"
+msgstr "Alamat IP"
+
+#: driji/forms.py:69 driji/templates/terminal.html:43
+#: driji/templates/terminal.html:53
+msgid "Port"
+msgstr "Port"
+
+#: driji/forms.py:92
+msgid "IP already exists"
+msgstr "IP sudah terdaftar"
+
+#: driji/forms.py:97 driji/templates/terminal.html:41
+#: driji/templates/terminal.html:51
+msgid "Serial Number"
+msgstr "Nomor Seri"
+
+#: driji/forms.py:101
+msgid "Serial number"
+msgstr "Nomor seri"
+
+#: driji/forms.py:107 driji/templates/terminal.html:40
+#: driji/templates/terminal.html:50
+msgid "Name"
+msgstr "Nama"
+
+#: driji/forms.py:111
+msgid "Terminal name"
+msgstr "Nama Terminal"
+
+#: driji/forms.py:146
+msgid "Serial number already exists"
+msgstr "Nomor seri sudah terdaftar"
+
+#: driji/forms.py:153
+msgid "This field is required."
+msgstr "Data tidak boleh kosong"
 
 #: driji/models.py:7
 msgid "name"
@@ -42,78 +81,256 @@ msgstr "nama"
 msgid "phone"
 msgstr "telepon"
 
-#: driji/templates/base.html:22 driji/templates/base.html:138
-msgid "Dashboard"
-msgstr "Dasbor"
-
-#: driji/templates/base.html:34
+#: driji/templates/base.html:30
 msgid "Select Language"
 msgstr "Pilih Bahasa"
 
-#: driji/templates/base.html:59 driji/templates/base.html:70
+#: driji/templates/base.html:55 driji/templates/base.html:66
 msgid "Notification"
 msgstr "Pemberitahuan"
 
-#: driji/templates/base.html:62
+#: driji/templates/base.html:58
 msgid "No new notification"
 msgstr "Tidak terdapat pemberitahuan baru"
 
-#: driji/templates/base.html:76
+#: driji/templates/base.html:72
 msgid "new registration"
 msgstr "pendaftaran baru"
 
-#: driji/templates/base.html:81
+#: driji/templates/base.html:77
 msgid "new orders"
 msgstr "pesanan baru"
 
-#: driji/templates/base.html:86
+#: driji/templates/base.html:82
 msgid "customers messages"
 msgstr "pesan dari pelanggan"
 
-#: driji/templates/base.html:91
+#: driji/templates/base.html:87
 msgid "view all"
 msgstr "lihat semua"
 
-#: driji/templates/base.html:109
+#: driji/templates/base.html:105
 msgid "Profile"
 msgstr "Profil"
 
-#: driji/templates/base.html:111
+#: driji/templates/base.html:107
 msgid "Logout"
 msgstr "Keluar"
 
-#: driji/templates/base.html:143 driji/templates/terminal.html:11
+#: driji/templates/base.html:134 driji/templates/index.html:8
+msgid "Dashboard"
+msgstr "Dasbor"
+
+#: driji/templates/base.html:139 driji/templates/terminal.html:8
+#: driji/templates/terminal.html:17 driji/templates/terminal_add.html:8
+#: driji/templates/terminal_edit.html:8 driji/templates/terminal_scan.html:8
 msgid "Terminal"
 msgstr "Terminal"
 
-#: driji/templates/base.html:148
+#: driji/templates/base.html:144
 msgid "User Management"
 msgstr "Pengaturan Pengguna"
 
-#: driji/templates/base.html:153
+#: driji/templates/base.html:149
 msgid "SMS"
 msgstr "Pesan Singkat"
 
-#: driji/templates/base.html:160
+#: driji/templates/base.html:156
 msgid "Compose Message"
 msgstr "Tulis Pesan"
 
-#: driji/templates/base.html:165
+#: driji/templates/base.html:161
 msgid "Inbox"
 msgstr "Kotak Masuk"
 
-#: driji/templates/base.html:170
+#: driji/templates/base.html:166
 msgid "Outbox"
 msgstr "Kotak Keluar"
 
-#: driji/templates/base.html:188
+#: driji/templates/base.html:197
 msgid "Copyright"
 msgstr "Hak Cipta"
 
-#: driji/templates/terminal.html:15
+#: driji/templates/terminal.html:22 driji/templates/terminal_add.html:20
+#: driji/templates/terminal_scan.html:20
 msgid "Add Terminal"
 msgstr "Tambah Terminal"
 
-#: driji/templates/terminal.html:23
+#: driji/templates/terminal.html:31
 msgid "Terminal List"
 msgstr "Daftar Terminal"
+
+#: driji/templates/terminal.html:39 driji/templates/terminal.html:49
+msgid "ID"
+msgstr "ID"
+
+#: driji/templates/terminal.html:42 driji/templates/terminal.html:52
+msgid "IP"
+msgstr "IP"
+
+#: driji/templates/terminal.html:44 driji/templates/terminal.html:54
+#: driji/templates/terminal.html:68 driji/templates/terminal_edit.html:37
+msgid "Action"
+msgstr "Aksi"
+
+#: driji/templates/terminal.html:73 driji/templates/terminal_edit.html:31
+msgid "Edit"
+msgstr "Ubah"
+
+#: driji/templates/terminal.html:78 driji/templates/terminal_edit.html:84
+msgid "Restart"
+msgstr "Muat Ulang"
+
+#: driji/templates/terminal.html:83
+msgid "Power Off"
+msgstr "Matikan Daya"
+
+#: driji/templates/terminal.html:88
+msgid "Test Sound"
+msgstr "Tes Suara"
+
+#: driji/templates/terminal_add.html:11
+msgid "New"
+msgstr "Baru"
+
+#: driji/templates/terminal_add.html:47
+msgid "Save"
+msgstr "Simpan"
+
+#: driji/templates/terminal_add.html:57
+msgid "Saving..."
+msgstr "Menyimpan..."
+
+#: driji/templates/terminal_edit.html:11 driji/templates/terminal_edit.html:72
+msgid "Update"
+msgstr "Memperbarui"
+
+#: driji/templates/terminal_edit.html:43
+msgid "Danger Zone"
+msgstr "Zona Bahaya"
+
+#: driji/templates/terminal_edit.html:81
+msgid "Restart Terminal"
+msgstr "Muat Ulang Terminal"
+
+#: driji/templates/terminal_edit.html:92
+msgid "Shutdown Terminal"
+msgstr "Tambah Terminal"
+
+#: driji/templates/terminal_edit.html:95
+msgid "Power off"
+msgstr "Matikan Daya"
+
+#: driji/templates/terminal_edit.html:102
+msgid "Delete This Terminal"
+msgstr "Hapus Terminal Ini"
+
+#: driji/templates/terminal_edit.html:104
+msgid "Delete"
+msgstr "Hapus"
+
+#: driji/templates/terminal_edit.html:108
+msgid "Format Terminal"
+msgstr "Bersihkan Terminal"
+
+#: driji/templates/terminal_edit.html:110
+msgid "Format"
+msgstr "Bersihkan"
+
+#: driji/templates/terminal_edit.html:130
+#: driji/templates/terminal_edit.html:161
+msgid "Are you ABSOLUTELY sure?"
+msgstr "Apakah anda BENAR-BENAR yakin?"
+
+#: driji/templates/terminal_edit.html:136
+#: driji/templates/terminal_edit.html:167
+msgid "This action"
+msgstr "Aksi ini"
+
+#: driji/templates/terminal_edit.html:136
+#: driji/templates/terminal_edit.html:167
+msgid "CANNOT"
+msgstr "TIDAK DAPAT"
+
+#: driji/templates/terminal_edit.html:136
+#: driji/templates/terminal_edit.html:167
+msgid "be undone"
+msgstr "dikembalikan"
+
+#: driji/templates/terminal_edit.html:136
+msgid "This will delete the"
+msgstr "Ini akan menghapus"
+
+#: driji/templates/terminal_edit.html:136
+msgid "from database"
+msgstr "dari basis data"
+
+#: driji/templates/terminal_edit.html:140
+#: driji/templates/terminal_edit.html:171
+msgid "Please type in the name of the terminal to confirm"
+msgstr "Mohon ketikan nama terminal untuk konfirmasi"
+
+#: driji/templates/terminal_edit.html:147
+msgid "I understand the consequences, delete this terminal"
+msgstr "Saya memahami dampaknya, hapus terminal ini"
+
+#: driji/templates/terminal_edit.html:167
+msgid "This will permanently delete all user and attendance records in"
+msgstr ""
+"Ini akan menghapus secara permanen semua pengguna dan daftar kehadiran pada"
+
+#: driji/templates/terminal_edit.html:178
+msgid "I understand the consequences, format this terminal"
+msgstr "Saya memahami dampaknya, bersihkan terminal ini"
+
+#: driji/templates/terminal_edit.html:201
+msgid "Updating..."
+msgstr "Mengubah..."
+
+#: driji/templates/terminal_edit.html:205
+msgid "Restarting..."
+msgstr "Memuat ulang..."
+
+#: driji/templates/terminal_edit.html:209
+msgid "Shutting down..."
+msgstr "Mematikan..."
+
+#: driji/templates/terminal_edit.html:236
+msgid "Formating..."
+msgstr "Membersihkan..."
+
+#: driji/templates/terminal_scan.html:11 driji/templates/terminal_scan.html:37
+msgid "Scan"
+msgstr "Pindai"
+
+#: driji/templates/terminal_scan.html:47
+msgid "Scanning..."
+msgstr "Memindai..."
+
+#: driji/views.py:67
+msgid "Successfully registering a new terminal"
+msgstr "Telah berhasil mendaftarkan terminal baru"
+
+#: driji/views.py:119
+msgid "Successfully updating a terminal"
+msgstr "Telah berhasil memperbarui terminal"
+
+#: driji/views.py:135
+#, python-format
+msgid "%(terminal)s has restarted"
+msgstr "%(terminal)s telah dimuat ulang"
+
+#: driji/views.py:148
+#, python-format
+msgid "%(terminal)s has shutdown"
+msgstr "%(terminal)s telah dimatikan"
+
+#: driji/views.py:159
+#, python-format
+msgid "%(terminal)s has formated"
+msgstr "%(terminal)s telah dibersihkan"
+
+#: driji/views.py:170
+#, python-format
+msgid "%(terminal)s has deleted"
+msgstr "%(terminal)s telah dihapus"

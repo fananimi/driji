@@ -1,0 +1,239 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb navbar-breadcrumb">
+  <li>
+    <a href="{% url 'terminal' %}">{% trans 'Terminal' %}</a>
+  </li>
+  <li class="active">
+    {% trans 'Update' %} ({{ terminal.name }})
+  </li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="title">{{ terminal.name }}</div>
+        </div>
+      </div>
+      <div class="card-body no-padding">
+        <div class="tabs card-no-padding">
+          <ul class="nav nav-tabs" role="tablist">
+            <li class="active">
+              <a class="center" href="#edit-content" id="edit-vtab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
+                <div class="icon fa fa-edit"></div>
+                <div class="title">{% trans 'Edit' %}</div>
+              </a>
+            </li>
+            <li>
+              <a class="center" href="#action-content" id="action-vtab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="false">
+                <div class="icon fa fa-gear"></div>
+                <div class="title">{% trans 'Action' %}</div>
+              </a>
+            </li>
+            <li>
+              <a class="center" href="#danger-content" id="danger-vtab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="false">
+                <div class="icon fa fa-warning"></div>
+                <div class="title">{% trans 'Danger Zone' %}</div>
+              </a>
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade active in" id="edit-content" aria-labelledby="edit-tab">
+              <form id="form_update" method="POST" action="">
+                {% csrf_token %}
+                <div class="form-group">
+                  <label for="{{ form.email.auto_id }}">{{ form.ip.label }}</label>
+                  <span class="error">{{ form.ip.errors.0 }}</span>
+                  {{ form.ip }}
+                </div>
+                <div class="form-group">
+                  <label for="{{ form.port.auto_id }}">{{ form.port.label }}</label>
+                  <span class="error">{{ form.port.errors.0 }}</span>
+                  {{ form.port }}
+                </div>
+                <div class="form-group">
+                  <label for="{{ form.serialnumber.auto_id }}">{{ form.serialnumber.label }}</label>
+                  <span class="error">{{ form.serialnumber.errors.0 }}</span>
+                  {{ form.serialnumber }}
+                </div>
+                <div class="form-group">
+                  <label for="{{ form.name.auto_id }}">{{ form.name.label }}</label>
+                  <span class="error">{{ form.name.errors.0 }}</span>
+                  {{ form.name }}
+                </div>
+                <div class="center">
+                  <button type="submit" class="btn btn-primary">{% trans 'Update' %}</button>
+                </div>
+              </form>
+            </div>
+            <div role="tabpanel" class="tab-pane fade in" id="action-content" aria-labelledby="action-tab">
+              <form id="form_restart" method="POST" action="{% url 'terminal_action' 'restart' terminal.id %}">
+                {% csrf_token %}
+                <div class="panel panel-success">
+                  <div class="panel-heading">
+                    {% trans 'Restart Terminal' %} : {{ terminal.name }}
+                  </div>
+                  <div class="panel-body center">
+                    <button class="btn btn-success">{% trans 'Restart' %}</button>
+                  </div>
+                </div>
+              </form>
+              <form id="form_poweroff" method="POST" action="{% url 'terminal_action' 'poweroff' terminal.id %}">
+                {% csrf_token %}
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    {% trans 'Shutdown Terminal' %} : {{ terminal.name }}
+                  </div>
+                  <div class="panel-body center">
+                    <button class="btn btn-default">{% trans 'Power off' %}</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div role="tabpanel" class="tab-pane fade in" id="danger-content" aria-labelledby="danger-tab">
+              <div class="panel panel-danger">
+                <div class="panel-heading">{% trans "Delete This Terminal" %} : {{ terminal.name }}</div>
+                <div class="panel-body center">
+                  <button class="btn btn-danger" data-toggle="modal" data-target="#modalDeleteConfirm">{% trans 'Delete' %}</button>
+                </div>
+              </div>
+              <div class="panel panel-danger">
+                <div class="panel-heading">{% trans 'Format Terminal' %} : {{ terminal.name }}</div>
+                <div class="panel-body center">
+                  <button class="btn btn-danger" data-toggle="modal" data-target="#modalFormatConfirm">{% trans 'Format' %}</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block modal %}
+  <!-- Delete confirmation -->
+  <div id="modalDeleteConfirm" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <form id="form_delete" method="POST" action="{% url 'terminal_action' 'delete' terminal.id %}">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">{% trans 'Are you ABSOLUTELY sure?' %}</h4>
+          </div>
+          <div class="modal-body">
+            {% csrf_token %}
+            <div class="form-group">
+              <span>
+                {% trans 'This action' %} <b>{% trans 'CANNOT' %}</b> {% trans 'be undone' %}. {% trans 'This will delete the' %} <b>{{ terminal.name }}</b> {% trans 'from database' %}.
+              </span>
+              <br/>
+              <label for="name">
+                {% trans 'Please type in the name of the terminal to confirm' %}
+              </label>
+              <input autocomplete="off" class="form-control" id="delete_field_confirm" name="name" type="text"/>
+            </div>
+          </div>
+          <div class="modal-footer center">
+            <button type="submit" id="deleteButtonConfirm" class="btn btn-danger" disabled>
+              {% trans 'I understand the consequences, delete this terminal' %}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <!-- format confirmation -->
+  <div id="modalFormatConfirm" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <form id="form_format" method="POST" action="{% url 'terminal_action' 'format' terminal.id %}">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">{% trans 'Are you ABSOLUTELY sure?' %}</h4>
+          </div>
+          <div class="modal-body">
+            {% csrf_token %}
+            <div class="form-group">
+              <span>
+                {% trans 'This action' %} <b>{% trans 'CANNOT' %}</b> {% trans 'be undone' %}. {% trans 'This will permanently delete all user and attendance records in' %} <b>{{ terminal.name }}</b> .
+              </span>
+              <br/>
+              <label for="name">
+                {% trans 'Please type in the name of the terminal to confirm' %}
+              </label>
+              <input autocomplete="off" class="form-control" id="format_field_confirm" name="name" type="text"/>
+            </div>
+          </div>
+          <div class="modal-footer center">
+            <button type="submit" id="formatButtonConfirm" class="btn btn-danger" disabled>
+              {% trans 'I understand the consequences, format this terminal' %}
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    var terminal_name = '{{ terminal.name }}';
+    // auto focus on page loaded
+    $('#id_ip').focus();
+    // on tab changed event
+    $(document).on('shown.bs.tab', 'a[data-toggle="tab"]', function (e) {
+      var link = $(this).attr('href');
+      if (link == '#edit-content'){
+        $('#id_ip').focus();
+      };
+    });
+    // update form
+    $('form#form_update').submit(function(event){
+      $(this).find(':submit').prop('disabled', true).html('{% trans "Updating..." %}');
+    });
+    // action restart
+    $('form#form_restart').submit(function(){
+      $(this).find(':submit').prop('disabled', true).html('{% trans "Restarting..." %}');
+    });
+    // action power off
+    $('form#form_poweroff').submit(function(){
+      $(this).find(':submit').prop('disabled', true).html('{% trans "Shutting down..." %}');
+    });
+    // on delete confirm
+    $('#modalDeleteConfirm').on('shown.bs.modal', function () {
+      $('#delete_field_confirm').focus();
+    });
+    $('#delete_field_confirm').on('input', function() {
+      var name = $('#delete_field_confirm').val();
+      if (terminal_name == name){
+        $('#deleteButtonConfirm').prop('disabled', false);
+      } else {
+        $('#deleteButtonConfirm').prop('disabled', true);
+      };
+    });
+    // on format confirm
+    $('#modalFormatConfirm').on('shown.bs.modal', function () {
+      $('#format_field_confirm').focus();
+    });
+    $('#format_field_confirm').on('input', function() {
+      var name = $('#format_field_confirm').val();
+      if (terminal_name == name){
+        $('#formatButtonConfirm').prop('disabled', false);
+      } else {
+        $('#formatButtonConfirm').prop('disabled', true);
+      };
+    });
+    $('form#form_format').submit(function(){
+      $(this).find(':submit').prop('disabled', true).html('{% trans "Formating..." %}');
+    });
+  </script>
+{% endblock %}

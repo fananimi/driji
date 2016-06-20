@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb navbar-breadcrumb">
+  <li>
+    <a href="{% url 'terminal' %}">{% trans 'Terminal' %}</a>
+  </li>
+  <li class="active">
+    {% trans 'New' %}
+  </li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-title">
+  <img src="{% static 'img/fingerprint_reader_48.png' %}" alt=""/>
+  <span class="title">
+    {% trans 'Add Terminal' %}
+  </span>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <form method="POST" action="{% url 'terminal_add' %}?connected=1">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="{{ form.email.auto_id }}">{{ form.ip.label }}</label>
+        <span class="error">{{ form.ip.errors.0 }}</span>
+        {{ form.ip }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.port.auto_id }}">{{ form.port.label }}</label>
+        <span class="error">{{ form.port.errors.0 }}</span>
+        {{ form.port }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.serialnumber.auto_id }}">{{ form.serialnumber.label }}</label>
+        <span class="error">{{ form.serialnumber.errors.0 }}</span>
+        {{ form.serialnumber }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.name.auto_id }}">{{ form.name.label }}</label>
+        <span class="error">{{ form.name.errors.0 }}</span>
+        {{ form.name }}
+      </div>
+      <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    $('#id_name').focus();
+    $("form").submit(function(){
+      $(this).find(":submit").attr("disabled","disabled").html("{% trans 'Saving...' %}");
+    });
+  </script>
+{% endblock %}

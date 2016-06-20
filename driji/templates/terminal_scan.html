@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb navbar-breadcrumb">
+  <li>
+    <a href="{% url 'terminal' %}">{% trans 'Terminal' %}</a>
+  </li>
+  <li class="active">
+    {% trans 'Scan' %}
+  </li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="page-title">
+  <img src="{% static 'img/fingerprint_reader_48.png' %}" alt=""/>
+  <span class="title">
+    {% trans 'Add Terminal' %}
+  </span>
+</div>
+<div class="row">
+  <div class="col-sm-6">
+    <form method="POST" action="">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="{{ form.email.auto_id }}">{{ form.ip.label }}</label>
+        <span class="error">{{ form.ip.errors.0 }}</span>
+        {{ form.ip }}
+      </div>
+      <div class="form-group">
+        <label for="{{ form.port.auto_id }}">{{ form.port.label }}</label>
+        <span class="error">{{ form.port.errors.0 }}</span>
+        {{ form.port }}
+      </div>
+      <button id="id_submit" type="submit" class="btn btn-primary">{% trans 'Scan' %}</button>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    $("#id_ip").focus();
+    $("form").submit(function(){
+      $(this).find(":submit").attr("disabled","disabled").html("{% trans 'Scanning...' %}");
+    });
+  </script>
+{% endblock %}

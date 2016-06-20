@@ -17,11 +17,7 @@
               <button type="button" class="navbar-expand-toggle">
                 <i class="fa fa-bars icon"></i>
               </button>
-              <ol class="breadcrumb navbar-breadcrumb">
-                <li class="active">
-                  {% trans 'Dashboard' %}
-                </li>
-              </ol>
+              {% block breadcrumb %}{% endblock %}
               <button type="button" class="navbar-right-expand-toggle pull-right visible-xs">
                 <i class="fa fa-th icon"></i>
               </button>
@@ -195,6 +191,7 @@
           </div>
         </div>
       </div>
+      {% block modal %}{% endblock %}
       <footer class="app-footer">
         <div class="wrapper">
           <span class="pull-right">2.1 <a href="#"><i class="fa fa-long-arrow-up"></i></a></span> {% trans 'Copyright' %} © 2015.
