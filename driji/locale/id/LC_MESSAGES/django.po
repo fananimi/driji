@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-20 04:44+0000\n"
+"POT-Creation-Date: 2016-06-20 07:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -177,15 +177,15 @@ msgstr "Aksi"
 msgid "Edit"
 msgstr "Ubah"
 
-#: driji/templates/terminal.html:78 driji/templates/terminal_edit.html:84
+#: driji/templates/terminal.html:81 driji/templates/terminal_edit.html:84
 msgid "Restart"
 msgstr "Muat Ulang"
 
-#: driji/templates/terminal.html:83
+#: driji/templates/terminal.html:89
 msgid "Power Off"
 msgstr "Matikan Daya"
 
-#: driji/templates/terminal.html:88
+#: driji/templates/terminal.html:97
 msgid "Test Sound"
 msgstr "Tes Suara"
 
@@ -193,11 +193,43 @@ msgstr "Tes Suara"
 msgid "New"
 msgstr "Baru"
 
-#: driji/templates/terminal_add.html:47
+#: driji/templates/terminal_add.html:28
+msgid "Add a new terminal"
+msgstr "Tambah terminal baru"
+
+#: driji/templates/terminal_add.html:55
 msgid "Save"
 msgstr "Simpan"
 
-#: driji/templates/terminal_add.html:57
+#: driji/templates/terminal_add.html:65 driji/templates/terminal_scan.html:55
+msgid "Info"
+msgstr "Info"
+
+#: driji/templates/terminal_add.html:71 driji/templates/terminal_scan.html:61
+msgid "You need to configure the terminal network before save it to system."
+msgstr "Anda perlu mengkonfigurasi jaringan terminal sebelum menyimpannya ke sistem."
+
+#: driji/templates/terminal_add.html:75 driji/templates/terminal_scan.html:65
+msgid "How To Settings Network"
+msgstr "Bagaimana Cara Menyetel Jaringan"
+
+#: driji/templates/terminal_add.html:78 driji/templates/terminal_scan.html:68
+msgid "Go to menu by holding the button <strong>OK</strong>"
+msgstr "Masuk ke menu dengan cara menahan tombol <strong>OK</strong>"
+
+#: driji/templates/terminal_add.html:79 driji/templates/terminal_scan.html:69
+msgid "Select menu <strong>Comm</strong>"
+msgstr "Pilih menu <strong>Comm</strong>"
+
+#: driji/templates/terminal_add.html:80 driji/templates/terminal_scan.html:70
+msgid "Select sub menu <strong>Network</strong>"
+msgstr "Pilih sub menu <strong>Network</strong>"
+
+#: driji/templates/terminal_add.html:81 driji/templates/terminal_scan.html:71
+msgid "Fill the form and then press <strong>OK</strong>"
+msgstr "Lengkapi formulir dan kemudian tekan tombol <strong>OK</strong>"
+
+#: driji/templates/terminal_add.html:94
 msgid "Saving..."
 msgstr "Menyimpan..."
 
@@ -299,11 +331,15 @@ msgstr "Mematikan..."
 msgid "Formating..."
 msgstr "Membersihkan..."
 
-#: driji/templates/terminal_scan.html:11 driji/templates/terminal_scan.html:37
+#: driji/templates/terminal_scan.html:11 driji/templates/terminal_scan.html:45
 msgid "Scan"
 msgstr "Pindai"
 
-#: driji/templates/terminal_scan.html:47
+#: driji/templates/terminal_scan.html:28
+msgid "Scan a terminal"
+msgstr "Pindah terminal"
+
+#: driji/templates/terminal_scan.html:84
 msgid "Scanning..."
 msgstr "Memindai..."
 
@@ -325,12 +361,12 @@ msgstr "%(terminal)s telah dimuat ulang"
 msgid "%(terminal)s has shutdown"
 msgstr "%(terminal)s telah dimatikan"
 
-#: driji/views.py:159
+#: driji/views.py:171
 #, python-format
 msgid "%(terminal)s has formated"
 msgstr "%(terminal)s telah dibersihkan"
 
-#: driji/views.py:170
+#: driji/views.py:182
 #, python-format
 msgid "%(terminal)s has deleted"
 msgstr "%(terminal)s telah dihapus"

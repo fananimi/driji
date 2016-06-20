@@ -22,30 +22,67 @@
 </div>
 <div class="row">
   <div class="col-sm-6">
-    <form method="POST" action="{% url 'terminal_add' %}?connected=1">
-      {% csrf_token %}
-      <div class="form-group">
-        <label for="{{ form.email.auto_id }}">{{ form.ip.label }}</label>
-        <span class="error">{{ form.ip.errors.0 }}</span>
-        {{ form.ip }}
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+        <div class="title">{% trans 'Add a new terminal' %}</div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="{{ form.port.auto_id }}">{{ form.port.label }}</label>
-        <span class="error">{{ form.port.errors.0 }}</span>
-        {{ form.port }}
+      <div class="card-body">
+        <div class="panel-body">
+          <form method="POST" action="{% url 'terminal_add' %}?connected=1">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="{{ form.email.auto_id }}">{{ form.ip.label }}</label>
+              <span class="error">{{ form.ip.errors.0 }}</span>
+              {{ form.ip }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.port.auto_id }}">{{ form.port.label }}</label>
+              <span class="error">{{ form.port.errors.0 }}</span>
+              {{ form.port }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.serialnumber.auto_id }}">{{ form.serialnumber.label }}</label>
+              <span class="error">{{ form.serialnumber.errors.0 }}</span>
+              {{ form.serialnumber }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.name.auto_id }}">{{ form.name.label }}</label>
+              <span class="error">{{ form.name.errors.0 }}</span>
+              {{ form.name }}
+            </div>
+            <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
+          </form>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="{{ form.serialnumber.auto_id }}">{{ form.serialnumber.label }}</label>
-        <span class="error">{{ form.serialnumber.errors.0 }}</span>
-        {{ form.serialnumber }}
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+        <div class="title">{% trans 'Info' %}</div>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="{{ form.name.auto_id }}">{{ form.name.label }}</label>
-        <span class="error">{{ form.name.errors.0 }}</span>
-        {{ form.name }}
+      <div class="card-body">
+        <div class="panel-body">
+          <p>
+            {% trans 'You need to configure the terminal network before save it to system.' %}
+          </p>
+          <img src="{% static 'img/zksoftware_device.jpg' %}" alt="" width="250px"/>
+        </div>
+        <div class="sub-title">{% trans 'How To Settings Network' %}</div>
+        <div class="panel-body">
+          <ol>
+            <li>{% trans 'Go to menu by holding the button <strong>OK</strong>' %}</li>
+            <li>{% trans 'Select menu <strong>Comm</strong>' %}</li>
+            <li>{% trans 'Select sub menu <strong>Network</strong>' %}</li>
+            <li>{% trans 'Fill the form and then press <strong>OK</strong>' %}</li>
+          </ol>
+        </div>
       </div>
-      <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
-    </form>
+    </div>
   </div>
 </div>
 {% endblock %}
