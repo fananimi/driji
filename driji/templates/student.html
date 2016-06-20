@@ -12,7 +12,7 @@
 {% block content %}
 <a href="{% url 'student_add' %}">
   <button type="button" name="button" class="btn btn-primary">
-      {% trans 'Add Student' %}
+      {% trans 'New Student' %}
   </button>
 </a>
 <div class="row">
@@ -28,32 +28,25 @@
           <thead>
             <tr>
               <th>Name</th>
-              <th>Position</th>
-              <th>Office</th>
-              <th>Age</th>
-              <th>Start date</th>
-              <th>Salary</th>
+              <th>Address</th>
+              <th>Grade</th>
             </tr>
           </thead>
           <tfoot>
             <tr>
               <th>Name</th>
-              <th>Position</th>
-              <th>Office</th>
-              <th>Age</th>
-              <th>Start date</th>
-              <th>Salary</th>
+              <th>Address</th>
+              <th>Grade</th>
             </tr>
           </tfoot>
           <tbody>
+            {% for student in students %}
             <tr>
-              <td>Donna Snider</td>
-              <td>Customer Support</td>
-              <td>New York</td>
-              <td>27</td>
-              <td>2011/01/25</td>
-              <td>$112,000</td>
+              <td>{{ student.name }}</td>
+              <td>{{ student.address }}</td>
+              <td>{{ student.grade }}</td>
             </tr>
+            {% endfor %}
           </tbody>
         </table>
       </div>

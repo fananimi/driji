@@ -9,7 +9,7 @@ from django.views.decorators.http import require_http_methods as alowed
 from zk.exception import ZKError
 from zkcluster.models import Terminal
 
-from .models import Grade
+from .models import Grade, Student
 from .forms import LoginForm, ScanTerminalForm, AddTerminalForm, EditTerminalForm, AddStudentForm, GradeForm
 
 @alowed(['GET'])
@@ -208,12 +208,20 @@ def terminal_action(request, action, terminal_id):
 @alowed(['GET'])
 @login_required
 def student(request):
-    return render(request, 'student.html')
+    students = Student.objects.all()
+    data = {
+        'students': students
+    }
+    return render(request, 'student.html', data)
 
 @alowed(['GET', 'POST'])
 @login_required
 def student_add(request):
     form = AddStudentForm(request.POST or None)
+    if request.POST and form.is_valid():
+        form.save()
+        messages.add_message(request, messages.SUCCESS, _('Successfully registering a new student'))
+        return redirect('student')
     data = {
         'form': form
     }

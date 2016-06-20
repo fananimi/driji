@@ -5,7 +5,7 @@
 {% block breadcrumb %}
 <ol class="breadcrumb navbar-breadcrumb">
   <li>
-    <a href="{% url 'terminal' %}">{% trans 'Terminal' %}</a>
+    <a href="{% url 'student' %}">{% trans 'Student' %}</a>
   </li>
   <li class="active">
     {% trans 'New Student' %}
@@ -59,4 +59,13 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    $('#id_name').focus();
+    $("form").submit(function(){
+      $(this).find(":submit").attr("disabled","disabled").html("{% trans 'Saving...' %}");
+    });
+  </script>
 {% endblock %}

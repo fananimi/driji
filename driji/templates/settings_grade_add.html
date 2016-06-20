@@ -8,7 +8,9 @@
     {% trans 'Settings' %}
   </li>
   <li>
-    {% trans 'Grade' %}
+    <a href="{% url 'settings_grade' %}">
+      {% trans 'Grade' %}
+    </a>
   </li>
   <li class="active">
     {% trans 'New Grade' %}
@@ -64,9 +66,11 @@
 </div>
 {% endblock %}
 
-
 {% block script %}
   <script>
     $('#id_name').focus();
+    $("form").submit(function(){
+      $(this).find(":submit").attr("disabled","disabled").html("{% trans 'Saving...' %}");
+    });
   </script>
 {% endblock %}
