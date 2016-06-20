@@ -139,10 +139,25 @@
                     <span class="icon fa fa-hdd-o"></span><span class="title">{% trans 'Terminal' %}</span>
                   </a>
                 </li>
-                <li {% if request.path == '/user/' %}class="active"{% endif %}>
-                  <a href="{% url 'user' %}">
+                <li class="panel panel-default dropdown">
+                  <a data-toggle="collapse" href="#dropdown-student">
                     <span class="icon fa fa-graduation-cap"></span><span class="title">{% trans 'Student Management' %}</span>
                   </a>
+                  <div id="dropdown-student" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <ul class="nav navbar-nav">
+                        <li>
+                          <a href="#">
+                            <span class="icon fa fa-user"></span><span class="title">{% trans 'Student' %}</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <span class="icon fa fa-male"></span><span class="title">{% trans 'Parent' %}</span>
+                          </a>
+                        </li>
+                    </div>
+                  </div>
                 </li>
                 <li>
                   <a href="#">
