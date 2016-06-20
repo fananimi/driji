@@ -26,15 +26,45 @@
         <div class="panel-body">
           <form method="POST" action="">
             {% csrf_token %}
-            <div class="form-group">
-              <label for="{{ form.name.auto_id }}">{{ form.name.label }}</label>
-              <span class="error">{{ form.name.errors.0 }}</span>
-              {{ form.name }}
+            <div class="panel panel-default">
+              <div class="panel-heading">{% trans 'Student Information' %}</div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="{{ form.name.auto_id }}">{{ form.name.label }}</label>
+                  <span class="error">{{ form.name.errors.0 }}</span>
+                  {{ form.name }}
+                </div>
+                <div class="form-group">
+                  <label for="{{ form.address.auto_id }}">{{ form.address.label }}</label>
+                  <span class="error">{{ form.address.errors.0 }}</span>
+                  {{ form.address }}
+                </div>
+                <div class="form-group">
+                  <label for="{{ form.student_phone_number.auto_id }}">{{ form.student_phone_number.label }}</label>
+                  <span class="error">{{ form.student_phone_number.errors.0 }}</span>
+                  {{ form.student_phone_number }}
+                </div>
+                <div class="form-group">
+                  <label for="{{ form.gender.auto_id }}">{{ form.gender.label }}</label>
+                  <span class="error">{{ form.gender.errors.0 }}</span>
+                  {{ form.gender }}
+                </div>
+              </div>
             </div>
-            <div class="form-group">
-              <label for="{{ form.address.auto_id }}">{{ form.address.label }}</label>
-              <span class="error">{{ form.address.errors.0 }}</span>
-              {{ form.address }}
+            <div class="panel panel-default">
+              <div class="panel-heading">{% trans 'Parent Information' %}</div>
+              <div class="panel-body">
+                <div class="form-group">
+                  <label for="{{ form.parent_name.auto_id }}">{{ form.parent_name.label }}</label>
+                  <span class="error">{{ form.parent_name.errors.0 }}</span>
+                  {{ form.parent_name }}
+                </div>
+                <div class="form-group">
+                  <label for="{{ form.parent_phone_number.auto_id }}">{{ form.parent_phone_number.label }}</label>
+                  <span class="error">{{ form.parent_phone_number.errors.0 }}</span>
+                  {{ form.parent_phone_number }}
+                </div>
+              </div>
             </div>
             <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
           </form>

@@ -10,7 +10,7 @@ from zk.exception import ZKError
 from zkcluster.models import Terminal
 
 from .models import Grade, Student
-from .forms import LoginForm, ScanTerminalForm, AddTerminalForm, EditTerminalForm, AddStudentForm, GradeForm
+from .forms import LoginForm, ScanTerminalForm, AddTerminalForm, EditTerminalForm, StudentForm, GradeForm
 
 @alowed(['GET'])
 @login_required
@@ -217,7 +217,7 @@ def student(request):
 @alowed(['GET', 'POST'])
 @login_required
 def student_add(request):
-    form = AddStudentForm(request.POST or None)
+    form = StudentForm(request.POST or None)
     if request.POST and form.is_valid():
         form.save()
         messages.add_message(request, messages.SUCCESS, _('Successfully registering a new student'))

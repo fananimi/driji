@@ -4,8 +4,8 @@ from django.utils.translation import ugettext_lazy as _
 from zkcluster.models import User as ZKUser
 
 class BaseModel(models.Model):
-    created_at = models.DateTimeField(_('Created at'), auto_now_add=True)
-    updated_at = models.DateTimeField(_('Updated at'), auto_now=True)
+    created_at = models.DateTimeField(_('created at'), auto_now_add=True)
+    updated_at = models.DateTimeField(_('updated at'), auto_now=True)
 
     class Meta:
         abstract = True
@@ -19,7 +19,7 @@ class Grade(BaseModel):
 
 class PhoneBook(BaseModel):
     name = models.CharField(_('name'), max_length=200)
-    phone_number = models.CharField(_('Phone Number'), max_length=16, unique=True, db_index=True)
+    phone_number = models.CharField(_('phone number'), max_length=16, unique=True, db_index=True)
 
     class Meta:
         db_table = 'driji_phonebook'
@@ -28,8 +28,13 @@ class PhoneBook(BaseModel):
         return self.name
 
 class PeopleBaseModel(BaseModel):
-    name = models.CharField(_('name'), max_length=200)
+    GENDER_CHOICES = (
+        ('m', _('male')),
+        ('f', _('female'))
+    )
+    name = models.CharField(_('full name'), max_length=200)
     address = models.CharField(_('address'), max_length=200, blank=True, null=True)
+    gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, default='m')
     phonebook = models.ForeignKey(PhoneBook, blank=True, null=True)
 
     class Meta:

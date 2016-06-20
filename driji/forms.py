@@ -167,18 +167,43 @@ class EditTerminalForm(AddTerminalForm):
             'class': 'form-control'
         })
 
-class AddStudentForm(forms.ModelForm):
+class StudentForm(forms.ModelForm):
+    parent_name = forms.CharField(
+        label=_('Full Name'),
+        max_length=200,
+        widget=forms.TextInput(attrs={
+            'placeholder': _('Parent Name'),
+            'class': 'form-control'
+        }))
+    student_phone_number = forms.CharField(
+        label=_('Phone Number'),
+        max_length=16,
+        widget=forms.TextInput(attrs={
+            'placeholder': _('08123456789'),
+            'class': 'form-control'
+        }))
+    parent_phone_number = forms.CharField(
+        label=_('Phone Number'),
+        max_length=16,
+        widget=forms.TextInput(attrs={
+            'placeholder': _('08123456789'),
+            'class': 'form-control'
+        }))
     class Meta:
         model = Student
-        fields = ('name', 'address')
+        fields = ('name', 'address', 'gender')
         widgets = {
             'name': forms.TextInput(attrs={
-                'class': 'form-control'
+                'class': 'form-control',
+                'placeholder': 'Full Name'
             }),
             'address': forms.Textarea(attrs={
                 'class': 'form-control',
                 'rows': 5
             }),
+            'gender': forms.Select(attrs={
+                'class': 'form-control'
+            })
         }
 
 class GradeForm(forms.ModelForm):
@@ -192,5 +217,5 @@ class GradeForm(forms.ModelForm):
             'description': forms.Textarea(attrs={
                 'class': 'form-control',
                 'rows': 5
-            }),
+            })
         }
