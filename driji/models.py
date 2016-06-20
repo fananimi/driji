@@ -12,7 +12,7 @@ class BaseModel(models.Model):
 
 class Grade(BaseModel):
     name = models.CharField(_('name'), max_length=15)
-    description = models.CharField(_('description'), max_length=200)
+    description = models.CharField(_('description'), max_length=200, blank=True, null=True)
 
     def __unicode__(self):
         return self.name
@@ -45,7 +45,7 @@ class Parent(PeopleBaseModel):
 
 class Student(PeopleBaseModel):
     attendance = models.ForeignKey(ZKUser, related_name='students', blank=True, null=True)
-    grade = models.ForeignKey(Grade, related_name='students')
+    grade = models.ForeignKey(Grade, related_name='students', blank=True, null=True, on_delete=models.SET_NULL)
 
     class Meta:
         db_table = 'driji_student'

@@ -9,7 +9,8 @@ from django.views.decorators.http import require_http_methods as alowed
 from zk.exception import ZKError
 from zkcluster.models import Terminal
 
-from .forms import LoginForm, ScanTerminalForm, AddTerminalForm, EditTerminalForm, AddStudentForm
+from .models import Grade
+from .forms import LoginForm, ScanTerminalForm, AddTerminalForm, EditTerminalForm, AddStudentForm, GradeForm
 
 @alowed(['GET'])
 @login_required
@@ -72,6 +73,7 @@ def terminal_add(request):
     return render(request, 'terminal_add.html', data)
 
 @alowed(['GET', 'POST'])
+@login_required
 def terminal_scan(request):
     form = ScanTerminalForm(request.POST or None)
     if request.POST and form.is_valid():
@@ -122,6 +124,7 @@ def terminal_edit(request, terminal_id):
     return render(request, 'terminal_edit.html', data)
 
 @alowed(['POST'])
+@login_required
 def terminal_restart(request, terminal_id):
     terminal = get_object_or_404(Terminal, pk=terminal_id)
     try:
@@ -134,6 +137,7 @@ def terminal_restart(request, terminal_id):
     return redirect('terminal')
 
 @alowed(['POST'])
+@login_required
 def terminal_poweroff(request, terminal_id):
     terminal = get_object_or_404(Terminal, pk=terminal_id)
     try:
@@ -147,6 +151,7 @@ def terminal_poweroff(request, terminal_id):
     return redirect('terminal')
 
 @alowed(['POST'])
+@login_required
 def terminal_voice(request, terminal_id):
     terminal = get_object_or_404(Terminal, pk=terminal_id)
     try:
@@ -159,6 +164,7 @@ def terminal_voice(request, terminal_id):
     return redirect('terminal')
 
 @alowed(['POST'])
+@login_required
 def terminal_format(request, terminal_id):
     terminal = get_object_or_404(Terminal, pk=terminal_id)
     try:
@@ -170,6 +176,7 @@ def terminal_format(request, terminal_id):
     return redirect('terminal')
 
 @alowed(['POST'])
+@login_required
 def terminal_delete(request, terminal_id):
     terminal = get_object_or_404(Terminal, pk=terminal_id)
     try:
@@ -211,3 +218,25 @@ def student_add(request):
         'form': form
     }
     return render(request, 'student_add.html', data)
+
+@alowed(['GET'])
+@login_required
+def settings_grade(request):
+    grade_list = Grade.objects.all()
+    data = {
+        'grade_list': grade_list
+    }
+    return render(request, 'settings_grade.html', data)
+
+@alowed(['GET', 'POST'])
+@login_required
+def settings_grade_add(request):
+    form = GradeForm(request.POST or None)
+    if request.POST and form.is_valid():
+        form.save()
+        messages.add_message(request, messages.SUCCESS, _('Successfully adding a new grade'))
+        return redirect('settings_grade')
+    data = {
+        'form': form
+    }
+    return render(request, 'settings_grade_add.html', data)

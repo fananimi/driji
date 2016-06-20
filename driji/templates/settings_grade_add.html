@@ -5,10 +5,13 @@
 {% block breadcrumb %}
 <ol class="breadcrumb navbar-breadcrumb">
   <li>
-    <a href="{% url 'terminal' %}">{% trans 'Terminal' %}</a>
+    {% trans 'Settings' %}
+  </li>
+  <li>
+    {% trans 'Grade' %}
   </li>
   <li class="active">
-    {% trans 'New Student' %}
+    {% trans 'New Grade' %}
   </li>
 </ol>
 {% endblock %}
@@ -19,7 +22,7 @@
     <div class="card">
       <div class="card-header">
         <div class="card-title">
-        <div class="title">{% trans 'Student Registration' %}</div>
+        <div class="title">{% trans 'Add New Grade' %}</div>
         </div>
       </div>
       <div class="card-body">
@@ -32,11 +35,11 @@
               {{ form.name }}
             </div>
             <div class="form-group">
-              <label for="{{ form.address.auto_id }}">{{ form.address.label }}</label>
-              <span class="error">{{ form.address.errors.0 }}</span>
-              {{ form.address }}
+              <label for="{{ form.description.auto_id }}">{{ form.description.label }}</label>
+              <span class="error">{{ form.description.errors.0 }}</span>
+              {{ form.description }}
             </div>
-            <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
+            <button id="id_submit" type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
           </form>
         </div>
       </div>

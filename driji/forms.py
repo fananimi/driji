@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 from zkcluster.models import Terminal
 
-from .models import Student
+from .models import Student, Grade
 
 class LoginForm(forms.Form):
     identifier = forms.CharField(
@@ -176,6 +176,20 @@ class AddStudentForm(forms.ModelForm):
                 'class': 'form-control'
             }),
             'address': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 5
+            }),
+        }
+
+class GradeForm(forms.ModelForm):
+    class Meta:
+        model = Grade
+        fields = ('name', 'description')
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control'
+            }),
+            'description': forms.Textarea(attrs={
                 'class': 'form-control',
                 'rows': 5
             }),

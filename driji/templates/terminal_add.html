@@ -8,18 +8,12 @@
     <a href="{% url 'terminal' %}">{% trans 'Terminal' %}</a>
   </li>
   <li class="active">
-    {% trans 'New' %}
+    {% trans 'New Terminal' %}
   </li>
 </ol>
 {% endblock %}
 
 {% block content %}
-<div class="page-title">
-  <img src="{% static 'img/fingerprint_reader_48.png' %}" alt=""/>
-  <span class="title">
-    {% trans 'Add Terminal' %}
-  </span>
-</div>
 <div class="row">
   <div class="col-sm-6">
     <div class="card">

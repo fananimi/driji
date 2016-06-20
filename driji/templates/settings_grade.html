@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb navbar-breadcrumb">
+  <li class="active">
+    {% trans 'Settings' %}
+  </li>
+  <li class="active">
+    {% trans 'Grade' %}
+  </li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'settings_grade_add' %}">
+  <button type="button" name="button" class="btn btn-primary">
+      {% trans 'New Grade' %}
+  </button>
+</a>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+        <div class="title">
+          {% trans 'Grade List' %}
+        </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="table table-striped" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>{% trans 'Name' %}</th>
+              <th>{% trans 'Description' %}</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>{% trans 'Name' %}</th>
+              <th>{% trans 'Description' %}</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            {% for grade in grade_list %}
+              <tr>
+                <td>{{ grade.name }}</td>
+                <td>{{ grade.description }}</td>
+              </tr>
+            {% endfor  %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
