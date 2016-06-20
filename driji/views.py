@@ -9,7 +9,7 @@ from django.views.decorators.http import require_http_methods as alowed
 from zk.exception import ZKError
 from zkcluster.models import Terminal
 
-from .forms import LoginForm, ScanTerminalForm, AddTerminalForm, EditTerminalForm
+from .forms import LoginForm, ScanTerminalForm, AddTerminalForm, EditTerminalForm, AddStudentForm
 
 @alowed(['GET'])
 @login_required
@@ -40,11 +40,6 @@ def logout_views(request):
         raise Http404()
     logout(request)
     return redirect('index')
-
-@alowed(['GET'])
-@login_required
-def user(request):
-    return render(request, 'user.html')
 
 @alowed(['GET'])
 @login_required
@@ -202,3 +197,17 @@ def terminal_action(request, action, terminal_id):
         return terminal_delete(request, terminal_id)
     else:
         raise Http404("Action doest not allowed")
+
+@alowed(['GET'])
+@login_required
+def student(request):
+    return render(request, 'student.html')
+
+@alowed(['GET', 'POST'])
+@login_required
+def student_add(request):
+    form = AddStudentForm(request.POST or None)
+    data = {
+        'form': form
+    }
+    return render(request, 'student_add.html', data)

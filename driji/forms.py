@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 
 from zkcluster.models import Terminal
 
+from .models import Student
+
 class LoginForm(forms.Form):
     identifier = forms.CharField(
         max_length=30,
@@ -164,3 +166,17 @@ class EditTerminalForm(AddTerminalForm):
         self.fields['port'].widget = forms.TextInput(attrs={
             'class': 'form-control'
         })
+
+class AddStudentForm(forms.ModelForm):
+    class Meta:
+        model = Student
+        fields = ('name', 'address')
+        widgets = {
+            'name': forms.TextInput(attrs={
+                'class': 'form-control'
+            }),
+            'address': forms.Textarea(attrs={
+                'class': 'form-control',
+                'rows': 5
+            }),
+        }

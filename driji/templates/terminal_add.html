@@ -33,7 +33,7 @@
           <form method="POST" action="{% url 'terminal_add' %}?connected=1">
             {% csrf_token %}
             <div class="form-group">
-              <label for="{{ form.email.auto_id }}">{{ form.ip.label }}</label>
+              <label for="{{ form.ip.auto_id }}">{{ form.ip.label }}</label>
               <span class="error">{{ form.ip.errors.0 }}</span>
               {{ form.ip }}
             </div>

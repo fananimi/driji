@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb navbar-breadcrumb">
+  <li>
+    <a href="{% url 'terminal' %}">{% trans 'Terminal' %}</a>
+  </li>
+  <li class="active">
+    {% trans 'New' %}
+  </li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+        <div class="title">{% trans 'Student Registration' %}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="panel-body">
+          <form method="POST" action="">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="{{ form.name.auto_id }}">{{ form.name.label }}</label>
+              <span class="error">{{ form.name.errors.0 }}</span>
+              {{ form.name }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.address.auto_id }}">{{ form.address.label }}</label>
+              <span class="error">{{ form.address.errors.0 }}</span>
+              {{ form.address }}
+            </div>
+            <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+        <div class="title">{% trans 'Info' %}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="panel-body">
+          <p>
+            {% trans 'Not available' %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
