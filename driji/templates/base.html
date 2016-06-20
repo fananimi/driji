@@ -141,29 +141,60 @@
                 </li>
                 <li {% if request.path == '/user/' %}class="active"{% endif %}>
                   <a href="{% url 'user' %}">
-                    <span class="icon fa fa-users"></span><span class="title">{% trans 'User Management' %}</span>
+                    <span class="icon fa fa-graduation-cap"></span><span class="title">{% trans 'Student Management' %}</span>
+                  </a>
+                </li>
+                <li>
+                  <a href="#">
+                    <span class="icon fa fa-database"></span><span class="title">{% trans 'Phone Book' %}</span>
                   </a>
                 </li>
                 <li class="panel panel-default dropdown">
-                  <a data-toggle="collapse" href="#dropdown-icon">
+                  <a data-toggle="collapse" href="#dropdown-sms">
                     <span class="icon fa fa-envelope"></span><span class="title">{% trans 'SMS' %}</span>
                   </a>
-                  <div id="dropdown-icon" class="panel-collapse collapse">
+                  <div id="dropdown-sms" class="panel-collapse collapse">
                     <div class="panel-body">
                       <ul class="nav navbar-nav">
                         <li>
-                          <a href="icons/glyphicons.html">
+                          <a href="#">
                             <span class="icon fa fa-pencil"></span><span class="title">{% trans 'Compose Message' %}</span>
                           </a>
                         </li>
                         <li>
-                          <a href="icons/glyphicons.html">
+                          <a href="#">
                             <span class="icon fa fa-inbox"></span><span class="title">{% trans 'Inbox' %}</span>
                           </a>
                         </li>
                         <li>
-                          <a href="icons/glyphicons.html">
+                          <a href="#">
                             <span class="icon fa fa-paper-plane"></span><span class="title">{% trans 'Outbox' %}</span>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </li>
+                <li class="panel panel-default dropdown">
+                  <a data-toggle="collapse" href="#dropdown-settings">
+                    <span class="icon fa fa-wrench"></span><span class="title">{% trans 'Settings' %}</span>
+                  </a>
+                  <div id="dropdown-settings" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <ul class="nav navbar-nav">
+                        <li>
+                          <a href="#">
+                            <span class="icon fa fa-folder"></span><span class="title">{% trans 'Grade' %}</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <span class="icon fa fa-envelope"></span><span class="title">{% trans 'SMS' %}</span>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <span class="icon fa fa-clock-o"></span><span class="title">{% trans 'Attendance' %}</span>
                           </a>
                         </li>
                       </ul>
