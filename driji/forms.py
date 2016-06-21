@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 from zkcluster.models import Terminal
 
-from .models import Student, Grade
+# from .models import Student, Grade
 
 class LoginForm(forms.Form):
     identifier = forms.CharField(
@@ -167,55 +167,55 @@ class EditTerminalForm(AddTerminalForm):
             'class': 'form-control'
         })
 
-class StudentForm(forms.ModelForm):
-    parent_name = forms.CharField(
-        label=_('Full Name'),
-        max_length=200,
-        widget=forms.TextInput(attrs={
-            'placeholder': _('Parent Name'),
-            'class': 'form-control'
-        }))
-    student_phone_number = forms.CharField(
-        label=_('Phone Number'),
-        max_length=16,
-        widget=forms.TextInput(attrs={
-            'placeholder': _('08123456789'),
-            'class': 'form-control'
-        }))
-    parent_phone_number = forms.CharField(
-        label=_('Phone Number'),
-        max_length=16,
-        widget=forms.TextInput(attrs={
-            'placeholder': _('08123456789'),
-            'class': 'form-control'
-        }))
-    class Meta:
-        model = Student
-        fields = ('name', 'address', 'gender')
-        widgets = {
-            'name': forms.TextInput(attrs={
-                'class': 'form-control',
-                'placeholder': 'Full Name'
-            }),
-            'address': forms.Textarea(attrs={
-                'class': 'form-control',
-                'rows': 5
-            }),
-            'gender': forms.Select(attrs={
-                'class': 'form-control'
-            })
-        }
+# class StudentForm(forms.ModelForm):
+#     parent_name = forms.CharField(
+#         label=_('Full Name'),
+#         max_length=200,
+#         widget=forms.TextInput(attrs={
+#             'placeholder': _('Parent Name'),
+#             'class': 'form-control'
+#         }))
+#     student_phone_number = forms.CharField(
+#         label=_('Phone Number'),
+#         max_length=16,
+#         widget=forms.TextInput(attrs={
+#             'placeholder': _('08123456789'),
+#             'class': 'form-control'
+#         }))
+#     parent_phone_number = forms.CharField(
+#         label=_('Phone Number'),
+#         max_length=16,
+#         widget=forms.TextInput(attrs={
+#             'placeholder': _('08123456789'),
+#             'class': 'form-control'
+#         }))
+#     class Meta:
+#         model = Student
+#         fields = ('name', 'address', 'gender')
+#         widgets = {
+#             'name': forms.TextInput(attrs={
+#                 'class': 'form-control',
+#                 'placeholder': 'Full Name'
+#             }),
+#             'address': forms.Textarea(attrs={
+#                 'class': 'form-control',
+#                 'rows': 5
+#             }),
+#             'gender': forms.Select(attrs={
+#                 'class': 'form-control'
+#             })
+#         }
 
-class GradeForm(forms.ModelForm):
-    class Meta:
-        model = Grade
-        fields = ('name', 'description')
-        widgets = {
-            'name': forms.TextInput(attrs={
-                'class': 'form-control'
-            }),
-            'description': forms.Textarea(attrs={
-                'class': 'form-control',
-                'rows': 5
-            })
-        }
+# class GradeForm(forms.ModelForm):
+#     class Meta:
+#         model = Grade
+#         fields = ('name', 'description')
+#         widgets = {
+#             'name': forms.TextInput(attrs={
+#                 'class': 'form-control'
+#             }),
+#             'description': forms.Textarea(attrs={
+#                 'class': 'form-control',
+#                 'rows': 5
+#             })
+#         }

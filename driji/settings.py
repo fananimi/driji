@@ -121,6 +121,8 @@ STATIC_URL = '/static/'
 LOGIN_URL = '/login/'
 LOGOUT_URL = '/logout/'
 
+ZK_USER_MODEL = 'driji.Profile'
+
 try:
     from settings_local import *
 except ImportError:
