@@ -1,5 +1,4 @@
 import calendar
-from datetime import datetime
 
 from django.contrib import messages
 from django.contrib.auth import logout, login
@@ -7,10 +6,11 @@ from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import ugettext as _
+from django.utils import timezone
 from django.views.decorators.http import require_http_methods as alowed
 
 from zk.exception import ZKError
-from zkcluster.models import Terminal
+from zkcluster.models import Terminal, Attendance
 
 from driji.models import Profile
 from driji.forms import LoginForm, ScanTerminalForm, AddTerminalForm, EditTerminalForm, StudentForm
@@ -216,7 +216,7 @@ def terminal_detail(request, terminal_id):
 
     # generate days number
     days = []
-    now = datetime.now()
+    now = timezone.now()
     cal = calendar.monthrange(now.year, now.month)
     for d in range (cal[0]-1, cal[1]+1):
         days.append(d)
@@ -254,18 +254,23 @@ def attendance(request, terminal_id):
     terminal = get_object_or_404(Terminal, pk=terminal_id)
     users = terminal.user_set.all()
 
+    today = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    midnight = (today + timezone.timedelta(days=1))
+    first_date = timezone.make_aware(timezone.datetime(today.year, today.month, 1))
+
     # generate days number
     days = []
-    now = datetime.now()
-    cal = calendar.monthrange(now.year, now.month)
+    cal = calendar.monthrange(today.year, today.month)
     for d in range (cal[0]-1, cal[1]+1):
         days.append(d)
+
+    attendances = terminal.attendances.filter(timestamp__range=(first_date, midnight))
 
     data = {
         'terminal': terminal,
         'users': users,
         'days': days,
-        'monthname': now.strftime('%B')
+        'monthname': today.strftime('%B')
     }
     return render(request, 'attendance.html', data)
 
