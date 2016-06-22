@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-20 07:03+0000\n"
+"POT-Creation-Date: 2016-06-22 06:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,68 +18,121 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: driji/forms.py:12
+#: driji/forms.py:16
 msgid "Username or Email"
 msgstr "Nama pengguna atau email"
 
-#: driji/forms.py:18
+#: driji/forms.py:22
 msgid "Password"
 msgstr "Kata Sandi"
 
-#: driji/forms.py:31
+#: driji/forms.py:35
 msgid "User does not exists"
 msgstr "Pengguna tidak ditemukan"
 
-#: driji/forms.py:45
+#: driji/forms.py:49
 msgid "Incorrect password"
 msgstr "Password tidak benar"
 
-#: driji/forms.py:61 driji/forms.py:127 driji/forms.py:161
+#: driji/forms.py:65 driji/forms.py:131 driji/forms.py:165
 msgid "IP Address"
 msgstr "Alamat IP"
 
-#: driji/forms.py:69 driji/templates/terminal.html:43
+#: driji/forms.py:73 driji/templates/terminal.html:43
 #: driji/templates/terminal.html:53
 msgid "Port"
 msgstr "Port"
 
-#: driji/forms.py:92
+#: driji/forms.py:96
 msgid "IP already exists"
 msgstr "IP sudah terdaftar"
 
-#: driji/forms.py:97 driji/templates/terminal.html:41
+#: driji/forms.py:101 driji/templates/terminal.html:41
 #: driji/templates/terminal.html:51
 msgid "Serial Number"
 msgstr "Nomor Seri"
 
-#: driji/forms.py:101
+#: driji/forms.py:105
 msgid "Serial number"
 msgstr "Nomor seri"
 
-#: driji/forms.py:107 driji/templates/terminal.html:40
+#: driji/forms.py:111 driji/templates/settings_grade.html:36
+#: driji/templates/settings_grade.html:42 driji/templates/student.html:30
+#: driji/templates/student.html:37 driji/templates/terminal.html:40
 #: driji/templates/terminal.html:50
 msgid "Name"
 msgstr "Nama"
 
-#: driji/forms.py:111
+#: driji/forms.py:115
 msgid "Terminal name"
 msgstr "Nama Terminal"
 
-#: driji/forms.py:146
+#: driji/forms.py:150
 msgid "Serial number already exists"
 msgstr "Nomor seri sudah terdaftar"
 
-#: driji/forms.py:153
+#: driji/forms.py:157
 msgid "This field is required."
 msgstr "Data tidak boleh kosong"
 
-#: driji/models.py:7
-msgid "name"
-msgstr "nama"
+#: driji/forms.py:175 driji/forms.py:178 driji/forms.py:206 driji/forms.py:209
+#: driji/models.py:36
+msgid "full name"
+msgstr "nama lengkap"
+
+#: driji/forms.py:183 driji/forms.py:214 driji/models.py:38
+msgid "gender"
+msgstr ""
+
+#: driji/forms.py:190 driji/forms.py:221 driji/models.py:59
+msgid "phone number"
+msgstr "nomor telepon"
+
+#: driji/forms.py:197 driji/forms.py:228 driji/models.py:58
+msgid "address"
+msgstr "alamat lengkap"
+
+#: driji/forms.py:245 driji/forms.py:251
+msgid "this number already exits"
+msgstr "nomo telepon sudah terdaftar"
+
+#: driji/forms.py:260
+msgid "phone number should be difference"
+msgstr "nomor telepon tidal boleh sama"
 
 #: driji/models.py:8
-msgid "phone"
-msgstr "telepon"
+msgid "created at"
+msgstr "dibuat pada"
+
+#: driji/models.py:9
+msgid "updated at"
+msgstr "diubah pada"
+
+#: driji/models.py:21
+msgid "Administrator"
+msgstr "Aministrator"
+
+#: driji/models.py:22
+msgid "Staff / Teacher"
+msgstr "Staf / Guru"
+
+#: driji/models.py:23 driji/templates/student.html:32
+#: driji/templates/student.html:39
+msgid "Parent"
+msgstr "Wali Murid"
+
+#: driji/models.py:24 driji/templates/base.html:162
+#: driji/templates/student.html:7 driji/templates/student_add.html:8
+msgid "Student"
+msgstr "Siswa"
+
+#: driji/models.py:31 driji/models.py:49
+msgid "male"
+msgstr "laki-laki"
+
+#: driji/models.py:32 driji/models.py:51
+msgid "female"
+msgstr "perempuan"
 
 #: driji/templates/base.html:30
 msgid "Select Language"
@@ -123,36 +176,115 @@ msgstr "Dasbor"
 
 #: driji/templates/base.html:139 driji/templates/terminal.html:8
 #: driji/templates/terminal.html:17 driji/templates/terminal_add.html:8
-#: driji/templates/terminal_edit.html:8 driji/templates/terminal_scan.html:8
+#: driji/templates/terminal_detail.html:8 driji/templates/terminal_edit.html:8
+#: driji/templates/terminal_scan.html:8
 msgid "Terminal"
 msgstr "Terminal"
 
-#: driji/templates/base.html:144
-msgid "User Management"
-msgstr "Pengaturan Pengguna"
+#: driji/templates/base.html:146
+msgid "Termianl Management"
+msgstr "Pengaturan Terminal"
 
-#: driji/templates/base.html:149
+#: driji/templates/base.html:167
+msgid "Phone Book"
+msgstr "Buku Telepon"
+
+#: driji/templates/base.html:172
+msgid "Attendance Report"
+msgstr "Absensi"
+
+#: driji/templates/base.html:177 driji/templates/base.html:215
 msgid "SMS"
 msgstr "Pesan Singkat"
 
-#: driji/templates/base.html:156
+#: driji/templates/base.html:184
 msgid "Compose Message"
 msgstr "Tulis Pesan"
 
-#: driji/templates/base.html:161
+#: driji/templates/base.html:189
 msgid "Inbox"
 msgstr "Kotak Masuk"
 
-#: driji/templates/base.html:166
+#: driji/templates/base.html:194
 msgid "Outbox"
 msgstr "Kotak Keluar"
 
-#: driji/templates/base.html:197
+#: driji/templates/base.html:203 driji/templates/settings_grade.html:8
+#: driji/templates/settings_grade_add.html:8
+msgid "Settings"
+msgstr ""
+
+#: driji/templates/base.html:210 driji/templates/settings_grade.html:11
+#: driji/templates/settings_grade_add.html:12
+msgid "Grade"
+msgstr ""
+
+#: driji/templates/base.html:220
+msgid "Attendance"
+msgstr ""
+
+#: driji/templates/base.html:251
 msgid "Copyright"
 msgstr "Hak Cipta"
 
-#: driji/templates/terminal.html:22 driji/templates/terminal_add.html:20
-#: driji/templates/terminal_scan.html:20
+#: driji/templates/settings_grade.html:19
+#: driji/templates/settings_grade_add.html:16
+msgid "New Grade"
+msgstr ""
+
+#: driji/templates/settings_grade.html:28
+msgid "Grade List"
+msgstr "Daftar Kelas"
+
+#: driji/templates/settings_grade.html:37
+#: driji/templates/settings_grade.html:43
+msgid "Description"
+msgstr "Deskripsi"
+
+#: driji/templates/settings_grade_add.html:27
+msgid "Add New Grade"
+msgstr "Tambah Kelas Baru"
+
+#: driji/templates/settings_grade_add.html:44
+#: driji/templates/student_add.html:84 driji/templates/terminal_add.html:49
+msgid "Save"
+msgstr "Simpan"
+
+#: driji/templates/settings_grade_add.html:54
+#: driji/templates/terminal_add.html:59 driji/templates/terminal_scan.html:49
+msgid "Info"
+msgstr "Info"
+
+#: driji/templates/settings_grade_add.html:60
+msgid "Not available"
+msgstr ""
+
+#: driji/templates/settings_grade_add.html:73
+#: driji/templates/student_add.html:97 driji/templates/terminal_add.html:88
+msgid "Saving..."
+msgstr "Menyimpan..."
+
+#: driji/templates/student.html:15 driji/templates/student_add.html:11
+msgid "New Student"
+msgstr ""
+
+#: driji/templates/student.html:23
+msgid "Student List"
+msgstr ""
+
+#: driji/templates/student.html:31 driji/templates/student.html:38
+msgid "Gender"
+msgstr "Jenis Kelamin"
+
+#: driji/templates/student_add.html:24
+msgid "Student Registration"
+msgstr "Pendaftaran Siswa"
+
+#: driji/templates/student_add.html:57
+msgid "Parent Information"
+msgstr "Informasi Orang Tua"
+
+#: driji/templates/terminal.html:22
 msgid "Add Terminal"
 msgstr "Tambah Terminal"
 
@@ -190,48 +322,41 @@ msgid "Test Sound"
 msgstr "Tes Suara"
 
 #: driji/templates/terminal_add.html:11
-msgid "New"
-msgstr "Baru"
+msgid "New Terminal"
+msgstr "Terminal Baru"
 
-#: driji/templates/terminal_add.html:28
+#: driji/templates/terminal_add.html:22
 msgid "Add a new terminal"
 msgstr "Tambah terminal baru"
 
-#: driji/templates/terminal_add.html:55
-msgid "Save"
-msgstr "Simpan"
-
 #: driji/templates/terminal_add.html:65 driji/templates/terminal_scan.html:55
-msgid "Info"
-msgstr "Info"
-
-#: driji/templates/terminal_add.html:71 driji/templates/terminal_scan.html:61
 msgid "You need to configure the terminal network before save it to system."
-msgstr "Anda perlu mengkonfigurasi jaringan terminal sebelum menyimpannya ke sistem."
+msgstr ""
+"Anda perlu mengkonfigurasi jaringan terminal sebelum menyimpannya ke sistem."
 
-#: driji/templates/terminal_add.html:75 driji/templates/terminal_scan.html:65
+#: driji/templates/terminal_add.html:69 driji/templates/terminal_scan.html:59
 msgid "How To Settings Network"
 msgstr "Bagaimana Cara Menyetel Jaringan"
 
-#: driji/templates/terminal_add.html:78 driji/templates/terminal_scan.html:68
+#: driji/templates/terminal_add.html:72 driji/templates/terminal_scan.html:62
 msgid "Go to menu by holding the button <strong>OK</strong>"
 msgstr "Masuk ke menu dengan cara menahan tombol <strong>OK</strong>"
 
-#: driji/templates/terminal_add.html:79 driji/templates/terminal_scan.html:69
+#: driji/templates/terminal_add.html:73 driji/templates/terminal_scan.html:63
 msgid "Select menu <strong>Comm</strong>"
 msgstr "Pilih menu <strong>Comm</strong>"
 
-#: driji/templates/terminal_add.html:80 driji/templates/terminal_scan.html:70
+#: driji/templates/terminal_add.html:74 driji/templates/terminal_scan.html:64
 msgid "Select sub menu <strong>Network</strong>"
 msgstr "Pilih sub menu <strong>Network</strong>"
 
-#: driji/templates/terminal_add.html:81 driji/templates/terminal_scan.html:71
+#: driji/templates/terminal_add.html:75 driji/templates/terminal_scan.html:65
 msgid "Fill the form and then press <strong>OK</strong>"
 msgstr "Lengkapi formulir dan kemudian tekan tombol <strong>OK</strong>"
 
-#: driji/templates/terminal_add.html:94
-msgid "Saving..."
-msgstr "Menyimpan..."
+#: driji/templates/terminal_detail.html:22
+msgid "User List"
+msgstr "Daftar Pengguna"
 
 #: driji/templates/terminal_edit.html:11 driji/templates/terminal_edit.html:72
 msgid "Update"
@@ -331,42 +456,46 @@ msgstr "Mematikan..."
 msgid "Formating..."
 msgstr "Membersihkan..."
 
-#: driji/templates/terminal_scan.html:11 driji/templates/terminal_scan.html:45
+#: driji/templates/terminal_scan.html:11 driji/templates/terminal_scan.html:39
 msgid "Scan"
 msgstr "Pindai"
 
-#: driji/templates/terminal_scan.html:28
+#: driji/templates/terminal_scan.html:22
 msgid "Scan a terminal"
 msgstr "Pindah terminal"
 
-#: driji/templates/terminal_scan.html:84
+#: driji/templates/terminal_scan.html:78
 msgid "Scanning..."
 msgstr "Memindai..."
 
-#: driji/views.py:67
+#: driji/views.py:63
 msgid "Successfully registering a new terminal"
 msgstr "Telah berhasil mendaftarkan terminal baru"
 
-#: driji/views.py:119
+#: driji/views.py:116
 msgid "Successfully updating a terminal"
 msgstr "Telah berhasil memperbarui terminal"
 
-#: driji/views.py:135
+#: driji/views.py:133
 #, python-format
 msgid "%(terminal)s has restarted"
 msgstr "%(terminal)s telah dimuat ulang"
 
-#: driji/views.py:148
+#: driji/views.py:147
 #, python-format
 msgid "%(terminal)s has shutdown"
 msgstr "%(terminal)s telah dimatikan"
 
-#: driji/views.py:171
+#: driji/views.py:172
 #, python-format
 msgid "%(terminal)s has formated"
 msgstr "%(terminal)s telah dibersihkan"
 
-#: driji/views.py:182
+#: driji/views.py:184
 #, python-format
 msgid "%(terminal)s has deleted"
 msgstr "%(terminal)s telah dihapus"
+
+#: driji/views.py:232
+msgid "Successfully registering a new student"
+msgstr "Telah berhasil mendaftarkan siswa baru"

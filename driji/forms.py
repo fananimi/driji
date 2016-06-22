@@ -257,7 +257,7 @@ class StudentForm(forms.Form):
         parent_phone_number = cleaned_data.get('parent_phone_number')
         if phone_number and parent_phone_number:
             if phone_number.lower() == parent_phone_number.lower():
-                err_message = _('phone number shoud be difference')
+                err_message = _('phone number should be difference')
                 self._errors['phone_number'] = self.error_class([err_message])
                 self._errors['parent_phone_number'] = self.error_class([err_message])
         return cleaned_data
