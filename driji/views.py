@@ -1,3 +1,6 @@
+import calendar
+from datetime import datetime
+
 from django.contrib import messages
 from django.contrib.auth import logout, login
 from django.contrib.auth.decorators import login_required
@@ -209,8 +212,19 @@ def terminal_action(request, action, terminal_id):
 @login_required
 def terminal_detail(request, terminal_id):
     terminal = get_object_or_404(Terminal, pk=terminal_id)
+    users = terminal.user_set.all()
+
+    # generate days number
+    days = []
+    now = datetime.now()
+    cal = calendar.monthrange(now.year, now.month)
+    for d in range (cal[0]-1, cal[1]+1):
+        days.append(d)
+
     data = {
-        'terminal': terminal
+        'terminal': terminal,
+        'users': users,
+        'days': days
     }
     return render(request, 'terminal_detail.html', data)
 

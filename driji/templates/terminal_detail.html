@@ -26,13 +26,42 @@
         <div role="tabpanel">
           <!-- Nav tabs -->
           <ul class="nav nav-tabs" role="tablist">
-            <li role="presentation" class="active"><a href="#registered" aria-controls="unregistered" role="tab" data-toggle="tab">Registerd User</a></li>
-            <li role="presentation"><a href="#unregistered" aria-controls="unregistered" role="tab" data-toggle="tab">Unregistered User</a></li>
+            <li role="presentation" class="active">
+              <a href="#registered" aria-controls="unregistered" role="tab" data-toggle="tab">
+                {% trans 'Attendance' %}
+              </a>
+            </li>
+            <li role="presentation">
+              <a href="#unregistered" aria-controls="unregistered" role="tab" data-toggle="tab">
+                {% trans 'Unregistered User' %}
+              </a>
+            </li>
           </ul>
           <!-- Tab panes -->
           <div class="tab-content">
             <div role="tabpanel" class="tab-pane active" id="registered">
-              <h1>registered</h1>
+              <table class="table table-reflow">
+                <thead>
+                  <tr>
+                    <th>{% trans 'Name' %}</th>
+                    {% for day in days %}
+                      <th>{{ day }}</th>
+                    {% endfor %}
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for user in users %}
+                  <tr>
+                    <th scope="row">
+                      {{ user.fullname }}
+                    </th>
+                    {% for day in days %}
+                      <td>P</td>
+                    {% endfor %}
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
             </div>
             <div role="tabpanel" class="tab-pane" id="unregistered">
               <h1>unregistered</h1>
