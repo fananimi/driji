@@ -24,12 +24,12 @@ class Profile(BaseModel, ZKBaseUser):
         (USER_STUDENT, _('Student'))
     )
 
-    GENDER_MALE = _('male')
-    GENDER_FEMALE = _('female')
+    GENDER_MALE = 'm'
+    GENDER_FEMALE = 'f'
 
     GENDER_CHOICES = (
-        ('m', GENDER_MALE),
-        ('f', GENDER_FEMALE)
+        (GENDER_MALE, _('male')),
+        (GENDER_FEMALE, _('female'))
     )
 
     user = models.OneToOneField(User, related_name='profile', blank=True, null=True)
@@ -43,25 +43,16 @@ class Profile(BaseModel, ZKBaseUser):
     class Meta:
         db_table = 'driji_profile'
 
+    @property
+    def gender_name(self):
+        if self.gender == self.GENDER_MALE:
+            return _('male')
+        elif self.gender == self.GENDER_FEMALE:
+            return _('female')
+
     def __unicode__(self):
         return self.fullname
 
-# class Grade(BaseModel):
-#     name = models.CharField(_('name'), max_length=15)
-#     description = models.CharField(_('description'), max_length=200, blank=True, null=True)
-#     profiles = models.ManyToManyField(
-#         profiles,
-#         verbose_name=_('profiles'),
-#         blank=True,
-#         related_name="grade_set",
-#         related_query_name="grade",
-#     )
-#
-#     class Meta:
-#         db_table = 'driji_grade'
-#
-#     def __unicode__(self):
-#         return self.name
 
 class PhoneBook(BaseModel):
     address = models.CharField(_('address'), max_length=200, blank=True, null=True)

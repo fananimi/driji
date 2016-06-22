@@ -134,10 +134,28 @@
                     <span class="icon fa fa-tachometer"></span><span class="title">{% trans 'Dashboard' %}</span>
                   </a>
                 </li>
-                <li {% if request.path == '/terminal/' %}class="active"{% endif %}>
-                  <a href="{% url 'terminal' %}">
+                <li class="panel panel-default dropdown">
+                  <a data-toggle="collapse" href="#dropdown-terminal">
                     <span class="icon fa fa-hdd-o"></span><span class="title">{% trans 'Terminal' %}</span>
                   </a>
+                  <div id="dropdown-terminal" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <ul class="nav navbar-nav">
+                        <li>
+                          <a href="{% url 'terminal' %}">
+                            <span class="icon fa fa-hdd-o"></span><span class="title">{% trans 'Termianl Management' %}</span>
+                          </a>
+                        </li>
+                        {% for terminal in terminals %}
+                        <li>
+                          <a href="#">
+                            <span class="icon fa fa-folder"></span><span class="title">{{ terminal.name }}</span>
+                          </a>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
                 </li>
                 <li {% if request.path == '/student/' %}class="active"{% endif %}>
                   <a href="{% url 'student' %}">

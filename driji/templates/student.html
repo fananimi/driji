@@ -29,19 +29,22 @@
             <tr>
               <th>{% trans 'Name' %}</th>
               <th>{% trans 'Gender' %}</th>
+              <th>{% trans 'Parent' %}</th>
             </tr>
           </thead>
           <tfoot>
             <tr>
               <th>{% trans 'Name' %}</th>
               <th>{% trans 'Gender' %}</th>
+              <th>{% trans 'Parent' %}</th>
             </tr>
           </tfoot>
           <tbody>
             {% for student in students %}
             <tr>
               <td>{{ student.fullname }}</td>
-              <td>{{ student.gender }}</td>
+              <td>{{ student.gender_name }}</td>
+              <td>{{ student.parent.fullname }}</td>
             </tr>
             {% endfor %}
           </tbody>

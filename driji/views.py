@@ -221,7 +221,7 @@ def student_add(request):
     if request.POST and form.is_valid():
         form.save()
         messages.add_message(request, messages.SUCCESS, _('Successfully registering a new student'))
-        # return redirect('student')
+        return redirect('student')
     data = {
         'form': form
     }
