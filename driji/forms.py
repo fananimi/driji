@@ -264,23 +264,6 @@ class StudentForm(forms.Form):
 
     def save(self):
         cleaned_data = self.cleaned_data
-        # Student Information
-        fullname = cleaned_data.get('fullname')
-        gender = cleaned_data.get('gender')
-        phone_number = cleaned_data.get('phone_number')
-        address = cleaned_data.get('address')
-
-        new_student = Profile.objects.create(
-            fullname=fullname,
-            user_type=Profile.USER_STUDENT,
-            gender=gender
-        )
-        new_student_phonebook = PhoneBook.objects.create(
-            address=address,
-            phone_number=phone_number,
-            profile=new_student
-        )
-
         # Parent Information
         parent_fullname = cleaned_data.get('parent_fullname')
         parent_gender = cleaned_data.get('parent_gender')
@@ -296,6 +279,24 @@ class StudentForm(forms.Form):
             address=parent_address,
             phone_number=parent_phone_number,
             profile=new_parent
+        )
+
+        # Student Information
+        fullname = cleaned_data.get('fullname')
+        gender = cleaned_data.get('gender')
+        phone_number = cleaned_data.get('phone_number')
+        address = cleaned_data.get('address')
+
+        new_student = Profile.objects.create(
+            fullname=fullname,
+            user_type=Profile.USER_STUDENT,
+            gender=gender,
+            parent=new_parent
+        )
+        new_student_phonebook = PhoneBook.objects.create(
+            address=address,
+            phone_number=phone_number,
+            profile=new_student
         )
 
         return new_student
