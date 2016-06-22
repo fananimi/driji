@@ -6,6 +6,8 @@ import views
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
 
+    url(r'^i18n/', include('django.conf.urls.i18n')),
+
     url(r'^$', views.index, name='index'),
     url(r'^login/$', views.login_view),
     url(r"^logout/$", views.logout_views, name="logout"),
