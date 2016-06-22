@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^terminal/$', views.terminal, name='terminal'),
     url(r'^terminal/scan/$', views.terminal_scan, name='terminal_scan'),
     url(r'^terminal/add$', views.terminal_add, name='terminal_add'),
+    url(r'^terminal/(?P<terminal_id>[0-9]+)/$', views.terminal_detail, name='terminal_detail'),
     url(r'^terminal/(?P<action>[\w-]+)/(?P<terminal_id>[0-9]+)/$', views.terminal_action, name='terminal_action'),
 
     url(r'^student/$', views.student, name='student'),

@@ -207,6 +207,15 @@ def terminal_action(request, action, terminal_id):
 
 @alowed(['GET'])
 @login_required
+def terminal_detail(request, terminal_id):
+    terminal = get_object_or_404(Terminal, pk=terminal_id)
+    data = {
+        'terminal': terminal
+    }
+    return render(request, 'terminal_detail.html', data)
+
+@alowed(['GET'])
+@login_required
 def student(request):
     students = Profile.objects.filter(user_type=Profile.USER_STUDENT)
     data = {

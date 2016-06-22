@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb navbar-breadcrumb">
+  <li>
+    <a href="{% url 'terminal' %}">{% trans 'Terminal' %}</a>
+  </li>
+  <li class="active">
+    {{ terminal.name }}
+  </li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="title">{% trans 'User List' %}</div>
+        </div>
+      </div>
+      <div class="card-body no-padding">
+        <div role="tabpanel">
+          <!-- Nav tabs -->
+          <ul class="nav nav-tabs" role="tablist">
+            <li role="presentation" class="active"><a href="#registered" aria-controls="unregistered" role="tab" data-toggle="tab">Registerd User</a></li>
+            <li role="presentation"><a href="#unregistered" aria-controls="unregistered" role="tab" data-toggle="tab">Unregistered User</a></li>
+          </ul>
+          <!-- Tab panes -->
+          <div class="tab-content">
+            <div role="tabpanel" class="tab-pane active" id="registered">
+              <h1>registered</h1>
+            </div>
+            <div role="tabpanel" class="tab-pane" id="unregistered">
+              <h1>unregistered</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

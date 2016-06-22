@@ -148,7 +148,7 @@
                         </li>
                         {% for terminal in terminals %}
                         <li>
-                          <a href="#">
+                          <a href="{% url 'terminal_detail' terminal.id %}">
                             <span class="icon fa fa-folder"></span><span class="title">{{ terminal.name }}</span>
                           </a>
                         </li>
