@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb navbar-breadcrumb">
+  <li>
+    {% trans 'Attendance' %}
+  </li>
+  <li class="active">
+    {{ terminal.name }}
+  </li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-xs-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+          <div class="title">{% trans 'Attendance Report' %} {{ monthname }}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <table class="table table-reflow">
+          <thead>
+            <th colspan="32" style="text-align: center;">
+              {{ monthname }}
+            </th>
+            <tr>
+              <th>{% trans 'Name' %}</th>
+              {% for day in days %}
+                <th>{{ day }}</th>
+              {% endfor %}
+            </tr>
+          </thead>
+          <tbody>
+            {% for user in users %}
+            <tr>
+              <th scope="row">
+                {{ user.fullname }}
+              </th>
+              {% for day in days %}
+                <td>P</td>
+              {% endfor %}
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

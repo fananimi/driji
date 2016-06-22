@@ -250,6 +250,25 @@ def student_add(request):
     }
     return render(request, 'student_add.html', data)
 
+def attendance(request, terminal_id):
+    terminal = get_object_or_404(Terminal, pk=terminal_id)
+    users = terminal.user_set.all()
+
+    # generate days number
+    days = []
+    now = datetime.now()
+    cal = calendar.monthrange(now.year, now.month)
+    for d in range (cal[0]-1, cal[1]+1):
+        days.append(d)
+
+    data = {
+        'terminal': terminal,
+        'users': users,
+        'days': days,
+        'monthname': now.strftime('%B')
+    }
+    return render(request, 'attendance.html', data)
+
 # @alowed(['GET'])
 # @login_required
 # def settings_grade(request):

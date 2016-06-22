@@ -21,6 +21,8 @@ urlpatterns = [
     url(r'^student/$', views.student, name='student'),
     url(r'^student/add/$', views.student_add, name='student_add'),
 
+    url(r'^attendance/(?P<terminal_id>[0-9]+)/$$', views.attendance, name='attendance'),
+
     url(r'^settings/grade/$', views.index, name='settings_grade'),
     url(r'^settings/grade/add/$', views.index, name='settings_grade_add')
 ]

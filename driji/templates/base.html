@@ -176,7 +176,7 @@
                       <ul class="nav navbar-nav">
                         {% for terminal in terminals %}
                         <li>
-                          <a href="{% url 'terminal_detail' terminal.id %}">
+                          <a href="{% url 'attendance' terminal.id %}">
                             <span class="icon fa fa-file"></span><span class="title">{{ terminal.name }}</span>
                           </a>
                         </li>
