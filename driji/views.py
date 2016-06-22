@@ -263,8 +263,27 @@ def attendance(request, terminal_id):
     cal = calendar.monthrange(today.year, today.month)
     for d in range (cal[0]-1, cal[1]+1):
         days.append(d)
+    # attendances = terminal.attendances.filter(timestamp__range=(first_date, midnight))
+    # from django.db.models import Count
+    # attendances = terminal.attendances.filter(timestamp__range=(first_date, midnight)).values(
+    #     'user__id',
+    #     'user__fullname',
+    #     'timestamp'
+    # )
+    # print attendances
+    # report = {}
+    # for attendance in attendances:
+    #     key = '{}'.format(attendance['user__id'])
+    #     if not report.get(key):
+    #         report[key] = {}
+    #         report[key]['fullname'] = attendance['user__fullname']
+    #         report[key]['attendances'] = [attendance['timestamp']]
+    #     else:
+    #         pass
 
-    attendances = terminal.attendances.filter(timestamp__range=(first_date, midnight))
+    # for k in report.keys():
+    #     key = '{}'.format(k)
+    #     print report[key]
 
     data = {
         'terminal': terminal,
