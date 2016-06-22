@@ -11,12 +11,6 @@
 {% endblock %}
 
 {% block content %}
-<div class="page-title">
-  <img src="{% static 'img/fingerprint_reader_48.png' %}" alt=""/>
-  <span class="title">
-    {% trans 'Terminal' %}
-  </span>
-</div>
 <a href="{% url 'terminal_scan' %}">
   <button type="button" name="button" class="btn btn-primary">
       {% trans 'Add Terminal' %}
