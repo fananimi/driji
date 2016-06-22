@@ -35,7 +35,7 @@ class Profile(BaseModel, ZKBaseUser):
     user = models.OneToOneField(User, related_name='profile', blank=True, null=True)
     fullname = models.CharField(_('full name'), max_length=100)
     user_type = models.IntegerField(choices=USER_TYPE, default=USER_STUDENT)
-    gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, default='m')
+    gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, default=GENDER_MALE)
     parent = models.ForeignKey("self", blank=True, null=True)
 
     NAME_FIELD = 'fullname'
