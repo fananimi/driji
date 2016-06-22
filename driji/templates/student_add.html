@@ -14,86 +14,85 @@
 {% endblock %}
 
 {% block content %}
-<div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">
-        <div class="title">{% trans 'Student Registration' %}</div>
+<form method="POST" action="">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card" style="padding-bottom: 45px;">
+        <div class="card-header">
+          <div class="card-title">
+          <div class="title">{% trans 'Student Registration' %}</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="panel-body">
+            <div class="form-group">
+              <label for="{{ form.fullname.auto_id }}">{{ form.fullname.label }}</label>
+              <span class="error">{{ form.fullname.errors.0 }}</span>
+              {{ form.fullname }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.gender.auto_id }}">{{ form.gender.label }}</label>
+              <span class="error">{{ form.gender.errors.0 }}</span>
+              {{ form.gender }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.phone_number.auto_id }}">{{ form.phone_number.label }}</label>
+              <span class="error">{{ form.phone_number.errors.0 }}</span>
+              {{ form.phone_number }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.address.auto_id }}">{{ form.address.label }}</label>
+              <span class="error">{{ form.address.errors.0 }}</span>
+              {{ form.address }}
+            </div>
+          </div>
         </div>
       </div>
-      <div class="card-body">
-        <div class="panel-body">
-          <form method="POST" action="">
-            {% csrf_token %}
-            <div class="panel panel-default">
-              <div class="panel-heading">{% trans 'Student Information' %}</div>
-              <div class="panel-body">
-                <div class="form-group">
-                  <label for="{{ form.name.auto_id }}">{{ form.name.label }}</label>
-                  <span class="error">{{ form.name.errors.0 }}</span>
-                  {{ form.name }}
-                </div>
-                <div class="form-group">
-                  <label for="{{ form.address.auto_id }}">{{ form.address.label }}</label>
-                  <span class="error">{{ form.address.errors.0 }}</span>
-                  {{ form.address }}
-                </div>
-                <div class="form-group">
-                  <label for="{{ form.student_phone_number.auto_id }}">{{ form.student_phone_number.label }}</label>
-                  <span class="error">{{ form.student_phone_number.errors.0 }}</span>
-                  {{ form.student_phone_number }}
-                </div>
-                <div class="form-group">
-                  <label for="{{ form.gender.auto_id }}">{{ form.gender.label }}</label>
-                  <span class="error">{{ form.gender.errors.0 }}</span>
-                  {{ form.gender }}
-                </div>
-              </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+          <div class="title">{% trans 'Parent Information' %}</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="panel-body">
+            <div class="form-group">
+              <label for="{{ form.parent_fullname.auto_id }}">{{ form.parent_fullname.label }}</label>
+              <span class="error">{{ form.parent_fullname.errors.0 }}</span>
+              {{ form.parent_fullname }}
             </div>
-            <div class="panel panel-default">
-              <div class="panel-heading">{% trans 'Parent Information' %}</div>
-              <div class="panel-body">
-                <div class="form-group">
-                  <label for="{{ form.parent_name.auto_id }}">{{ form.parent_name.label }}</label>
-                  <span class="error">{{ form.parent_name.errors.0 }}</span>
-                  {{ form.parent_name }}
-                </div>
-                <div class="form-group">
-                  <label for="{{ form.parent_phone_number.auto_id }}">{{ form.parent_phone_number.label }}</label>
-                  <span class="error">{{ form.parent_phone_number.errors.0 }}</span>
-                  {{ form.parent_phone_number }}
-                </div>
-              </div>
+            <div class="form-group">
+              <label for="{{ form.parent_gender.auto_id }}">{{ form.parent_gender.label }}</label>
+              <span class="error">{{ form.parent_gender.errors.0 }}</span>
+              {{ form.parent_gender }}
             </div>
-            <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
-          </form>
+            <div class="form-group">
+              <label for="{{ form.parent_phone_number.auto_id }}">{{ form.parent_phone_number.label }}</label>
+              <span class="error">{{ form.parent_phone_number.errors.0 }}</span>
+              {{ form.parent_phone_number }}
+            </div>
+            <div class="form-group">
+              <label for="{{ form.parent_address.auto_id }}">{{ form.parent_address.label }}</label>
+              <span class="error">{{ form.parent_address.errors.0 }}</span>
+              {{ form.parent_address }}
+            </div>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn btn-primary" style="float: right; margin-bottom: 30px; margin-right: 15px;">{% trans 'Save' %}</button>
+          </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">
-        <div class="title">{% trans 'Info' %}</div>
-        </div>
-      </div>
-      <div class="card-body">
-        <div class="panel-body">
-          <p>
-            {% trans 'Not available' %}
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+</form>
 {% endblock %}
 
 {% block script %}
   <script>
-    $('#id_name').focus();
+    $('#id_fullname').focus();
     $("form").submit(function(){
       $(this).find(":submit").attr("disabled","disabled").html("{% trans 'Saving...' %}");
     });

@@ -15,8 +15,8 @@ urlpatterns = [
     url(r'^terminal/add$', views.terminal_add, name='terminal_add'),
     url(r'^terminal/(?P<action>[\w-]+)/(?P<terminal_id>[0-9]+)/$', views.terminal_action, name='terminal_action'),
 
-    url(r'^student/$', views.index, name='student'),
-    url(r'^student/add/$', views.index, name='student_add'),
+    url(r'^student/$', views.student, name='student'),
+    url(r'^student/add/$', views.student_add, name='student_add'),
 
     url(r'^settings/grade/$', views.index, name='settings_grade'),
     url(r'^settings/grade/add/$', views.index, name='settings_grade_add')

@@ -5,6 +5,8 @@ from django.contrib.auth.models import User
 
 from zkcluster.models import Terminal
 
+from driji.models import Profile, PhoneBook
+
 # from .models import Student, Grade
 
 class LoginForm(forms.Form):
@@ -167,55 +169,133 @@ class EditTerminalForm(AddTerminalForm):
             'class': 'form-control'
         })
 
-# class StudentForm(forms.ModelForm):
-#     parent_name = forms.CharField(
-#         label=_('Full Name'),
-#         max_length=200,
-#         widget=forms.TextInput(attrs={
-#             'placeholder': _('Parent Name'),
-#             'class': 'form-control'
-#         }))
-#     student_phone_number = forms.CharField(
-#         label=_('Phone Number'),
-#         max_length=16,
-#         widget=forms.TextInput(attrs={
-#             'placeholder': _('08123456789'),
-#             'class': 'form-control'
-#         }))
-#     parent_phone_number = forms.CharField(
-#         label=_('Phone Number'),
-#         max_length=16,
-#         widget=forms.TextInput(attrs={
-#             'placeholder': _('08123456789'),
-#             'class': 'form-control'
-#         }))
-#     class Meta:
-#         model = Student
-#         fields = ('name', 'address', 'gender')
-#         widgets = {
-#             'name': forms.TextInput(attrs={
-#                 'class': 'form-control',
-#                 'placeholder': 'Full Name'
-#             }),
-#             'address': forms.Textarea(attrs={
-#                 'class': 'form-control',
-#                 'rows': 5
-#             }),
-#             'gender': forms.Select(attrs={
-#                 'class': 'form-control'
-#             })
-#         }
+class StudentForm(forms.Form):
+    # student information
+    fullname = forms.CharField(
+        label=_('full name'),
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            'placeholder': _('full name'),
+            'class': 'form-control'
+        })
+    )
+    gender = forms.ChoiceField(
+        label=_('gender'),
+        choices=Profile.GENDER_CHOICES,
+        widget=forms.Select(attrs={
+            'class': 'form-control'
+        })
+    )
+    phone_number = forms.CharField(
+        label=_('phone number'),
+        max_length=16,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control'
+        })
+    )
+    address = forms.CharField(
+        label=_('address'),
+        max_length=200,
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'rows': 3
+        })
+    )
+    # parent information
+    parent_fullname = forms.CharField(
+        label=_('full name'),
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            'placeholder': _('full name'),
+            'class': 'form-control'
+        })
+    )
+    parent_gender = forms.ChoiceField(
+        label=_('gender'),
+        choices=Profile.GENDER_CHOICES,
+        widget=forms.Select(attrs={
+            'class': 'form-control'
+        })
+    )
+    parent_phone_number = forms.CharField(
+        label=_('phone number'),
+        max_length=16,
+        widget=forms.TextInput(attrs={
+            'class': 'form-control'
+        })
+    )
+    parent_address = forms.CharField(
+        label=_('address'),
+        max_length=200,
+        widget=forms.Textarea(attrs={
+            'class': 'form-control',
+            'rows': 3
+        })
+    )
 
-# class GradeForm(forms.ModelForm):
-#     class Meta:
-#         model = Grade
-#         fields = ('name', 'description')
-#         widgets = {
-#             'name': forms.TextInput(attrs={
-#                 'class': 'form-control'
-#             }),
-#             'description': forms.Textarea(attrs={
-#                 'class': 'form-control',
-#                 'rows': 5
-#             })
-#         }
+    def is_phone_number_available(self, phone_number):
+        phonebook = PhoneBook.objects.filter(phone_number__iexact=phone_number).first()
+        if phonebook:
+            return True
+        return False
+
+    def clean_phone_number(self):
+        phone_number = self.cleaned_data.get('phone_number')
+        if self.is_phone_number_available(phone_number):
+            raise forms.ValidationError(_('this number already exits'))
+        return phone_number
+
+    def clean_parent_phone_number(self):
+        phone_number = self.cleaned_data.get('parent_phone_number')
+        if self.is_phone_number_available(phone_number):
+            raise forms.ValidationError(_('this number already exits'))
+        return phone_number
+
+    def clean(self):
+        cleaned_data = self.cleaned_data
+        phone_number = cleaned_data.get('phone_number')
+        parent_phone_number = cleaned_data.get('parent_phone_number')
+        if phone_number and parent_phone_number:
+            if phone_number.lower() == parent_phone_number.lower():
+                err_message = _('phone number shoud be difference')
+                self._errors['phone_number'] = self.error_class([err_message])
+                self._errors['parent_phone_number'] = self.error_class([err_message])
+        return cleaned_data
+
+    def save(self):
+        cleaned_data = self.cleaned_data
+        # Student Information
+        fullname = cleaned_data.get('fullname')
+        gender = cleaned_data.get('gender')
+        phone_number = cleaned_data.get('phone_number')
+        address = cleaned_data.get('address')
+
+        new_student = Profile.objects.create(
+            fullname=fullname,
+            user_type=Profile.USER_STUDENT,
+            gender=gender
+        )
+        new_student_phonebook = PhoneBook.objects.create(
+            address=address,
+            phone_number=phone_number,
+            profile=new_student
+        )
+
+        # Parent Information
+        parent_fullname = cleaned_data.get('parent_fullname')
+        parent_gender = cleaned_data.get('parent_gender')
+        parent_phone_number = cleaned_data.get('parent_phone_number')
+        parent_address = cleaned_data.get('parent_address')
+
+        new_parent = Profile.objects.create(
+            fullname=parent_fullname,
+            user_type=Profile.USER_PARENT,
+            gender=parent_gender
+        )
+        new_parent_phonebook = PhoneBook.objects.create(
+            address=parent_address,
+            phone_number=parent_phone_number,
+            profile=new_parent
+        )
+
+        return new_student

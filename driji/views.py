@@ -9,9 +9,8 @@ from django.views.decorators.http import require_http_methods as alowed
 from zk.exception import ZKError
 from zkcluster.models import Terminal
 
-# from .models import Grade, Student
-# from .forms import LoginForm, ScanTerminalForm, AddTerminalForm, EditTerminalForm, StudentForm, GradeForm
-from driji.forms import LoginForm, ScanTerminalForm, AddTerminalForm, EditTerminalForm
+from driji.models import Profile
+from driji.forms import LoginForm, ScanTerminalForm, AddTerminalForm, EditTerminalForm, StudentForm
 
 @alowed(['GET'])
 @login_required
@@ -206,28 +205,28 @@ def terminal_action(request, action, terminal_id):
     else:
         raise Http404("Action doest not allowed")
 
-# @alowed(['GET'])
-# @login_required
-# def student(request):
-#     students = Student.objects.all()
-#     data = {
-#         'students': students
-#     }
-#     return render(request, 'student.html', data)
-#
-# @alowed(['GET', 'POST'])
-# @login_required
-# def student_add(request):
-#     form = StudentForm(request.POST or None)
-#     if request.POST and form.is_valid():
-#         form.save()
-#         messages.add_message(request, messages.SUCCESS, _('Successfully registering a new student'))
-#         return redirect('student')
-#     data = {
-#         'form': form
-#     }
-#     return render(request, 'student_add.html', data)
-#
+@alowed(['GET'])
+@login_required
+def student(request):
+    students = Profile.objects.filter(user_type=Profile.USER_STUDENT)
+    data = {
+        'students': students
+    }
+    return render(request, 'student.html', data)
+
+@alowed(['GET', 'POST'])
+@login_required
+def student_add(request):
+    form = StudentForm(request.POST or None)
+    if request.POST and form.is_valid():
+        form.save()
+        messages.add_message(request, messages.SUCCESS, _('Successfully registering a new student'))
+        # return redirect('student')
+    data = {
+        'form': form
+    }
+    return render(request, 'student_add.html', data)
+
 # @alowed(['GET'])
 # @login_required
 # def settings_grade(request):
