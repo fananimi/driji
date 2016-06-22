@@ -82,7 +82,7 @@ msgstr "nama lengkap"
 
 #: driji/forms.py:183 driji/forms.py:214 driji/models.py:38
 msgid "gender"
-msgstr ""
+msgstr "jenis kelamin"
 
 #: driji/forms.py:190 driji/forms.py:221 driji/models.py:59
 msgid "phone number"
@@ -212,16 +212,16 @@ msgstr "Kotak Keluar"
 #: driji/templates/base.html:203 driji/templates/settings_grade.html:8
 #: driji/templates/settings_grade_add.html:8
 msgid "Settings"
-msgstr ""
+msgstr "Pengaturan"
 
 #: driji/templates/base.html:210 driji/templates/settings_grade.html:11
 #: driji/templates/settings_grade_add.html:12
 msgid "Grade"
-msgstr ""
+msgstr "Kelas"
 
 #: driji/templates/base.html:220
 msgid "Attendance"
-msgstr ""
+msgstr "Absensi"
 
 #: driji/templates/base.html:251
 msgid "Copyright"
@@ -230,7 +230,7 @@ msgstr "Hak Cipta"
 #: driji/templates/settings_grade.html:19
 #: driji/templates/settings_grade_add.html:16
 msgid "New Grade"
-msgstr ""
+msgstr "Kelas Baru"
 
 #: driji/templates/settings_grade.html:28
 msgid "Grade List"
@@ -257,7 +257,7 @@ msgstr "Info"
 
 #: driji/templates/settings_grade_add.html:60
 msgid "Not available"
-msgstr ""
+msgstr "Tidak tersedia"
 
 #: driji/templates/settings_grade_add.html:73
 #: driji/templates/student_add.html:97 driji/templates/terminal_add.html:88
@@ -266,11 +266,11 @@ msgstr "Menyimpan..."
 
 #: driji/templates/student.html:15 driji/templates/student_add.html:11
 msgid "New Student"
-msgstr ""
+msgstr "Siswa Baru"
 
 #: driji/templates/student.html:23
 msgid "Student List"
-msgstr ""
+msgstr "Daftar Siswa"
 
 #: driji/templates/student.html:31 driji/templates/student.html:38
 msgid "Gender"
