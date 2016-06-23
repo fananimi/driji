@@ -1,8 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import User as AuthUser
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
-from zkcluster.models import ZKBaseUser
+from zkcluster.models import ZKBaseUser, Attendance
 
 class BaseModel(models.Model):
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
@@ -17,7 +18,7 @@ class User(BaseModel, ZKBaseUser):
     USER_PARENT = 3
     USER_STUDENT = 4
 
-    USER_TYPE = (
+    USER_TYPE_CHOICES = (
         (USER_ADMINISTRATOR, _('Administrator')),
         (USER_STAFF, _('Staff / Teacher')),
         (USER_PARENT, _('Parent')),
@@ -34,7 +35,7 @@ class User(BaseModel, ZKBaseUser):
 
     auth = models.OneToOneField(AuthUser, related_name='driji_user', blank=True, null=True)
     fullname = models.CharField(_('full name'), max_length=100)
-    user_type = models.IntegerField(choices=USER_TYPE, default=USER_STUDENT)
+    user_type = models.IntegerField(choices=USER_TYPE_CHOICES, default=USER_STUDENT)
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, default=GENDER_MALE)
     parent = models.ForeignKey("self", blank=True, null=True)
 
@@ -64,3 +65,32 @@ class PhoneBook(BaseModel):
 
     def __unicode__(self):
         return self.driji_user.fullname
+
+class AttendanceSumary(BaseModel):
+    STATUS_PRESENT = 'p'
+    STATUS_ABSENCE = 'a'
+    STATUS_LATE = 'l'
+
+    STATUS_CHOICES = (
+        (STATUS_PRESENT, _('present')),
+        (STATUS_ABSENCE, _('absense')),
+        (STATUS_LATE, _('late'))
+    )
+
+    driji_user = models.ForeignKey(User, related_name='attendances')
+    zk_attendance = models.OneToOneField(Attendance, related_name='sumary')
+    date = models.DateField()
+    status = models.CharField(_('status'), max_length=1, choices=STATUS_CHOICES)
+
+    def save(self, *args, **kwargs):
+        timestamp = self.zk_attendance.timestamp
+        late_time = timestamp.replace(hour=8, minute=0, microsecond=0)
+        if  timestamp >= late_time:
+            self.status = self.STATUS_LATE
+        else:
+            self.status = self.STATUS_PRESENT
+        super(AttendanceSumary, self).save(*args, **kwargs)
+
+    class Meta:
+        db_table = 'driji_attendance_sumary'
+        unique_together = ('driji_user', 'date')
