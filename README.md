@@ -22,7 +22,7 @@ Anda bisa mengatur mesin sidik jari secara terpusat hanya dengan satu komputer y
 Tidak memerlukan perangkat keras berlebih, cukup dengan minimal pc yang di fungsikan sebagai server dan sebuah mesin sidik jari produksi ZKSofware.
 
 ***Easy To Use*** : 
-Diji mudah di operasikan melalui perambah (*browser*) secara daring (*online*).
+Driji mudah di operasikan melalui perambah (*browser*) secara daring (*online*).
 
 ***Freedom*** : 
 Driji dilisensikan di bawah GPL yang diciptakan untuk melindungi kebebasan Anda. Anda bebas untuk menggunakan Driji dengan cara apapun yang Anda pilih: menginstalnya, menggunakannya, memodifikasi, mendistribusikannya.
