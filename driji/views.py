@@ -12,7 +12,7 @@ from django.views.decorators.http import require_http_methods as alowed
 from zk.exception import ZKError
 from zkcluster.models import Terminal, Attendance
 
-from driji.models import Profile
+from driji.models import User
 from driji.forms import LoginForm, ScanTerminalForm, AddTerminalForm, EditTerminalForm, StudentForm
 
 @alowed(['GET'])
@@ -231,7 +231,7 @@ def terminal_detail(request, terminal_id):
 @alowed(['GET'])
 @login_required
 def student(request):
-    students = Profile.objects.filter(user_type=Profile.USER_STUDENT)
+    students = User.objects.filter(user_type=User.USER_STUDENT)
     data = {
         'students': students
     }

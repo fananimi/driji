@@ -1,11 +1,11 @@
 from django import forms
 from django.utils.translation import ugettext as _
 from django.contrib.auth import authenticate
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User as AuthUser
 
 from zkcluster.models import Terminal
 
-from driji.models import Profile, PhoneBook
+from driji.models import User, PhoneBook
 
 # from .models import Student, Grade
 
@@ -27,9 +27,9 @@ class LoginForm(forms.Form):
         identifier = self.cleaned_data.get('identifier')
 
         if '@' in identifier:
-            user = User.objects.filter(email__iexact=identifier).first()
+            user = AuthUser.objects.filter(email__iexact=identifier).first()
         else:
-            user = User.objects.filter(username__iexact=identifier).first()
+            user = AuthUser.objects.filter(username__iexact=identifier).first()
 
         if not user:
             raise forms.ValidationError(_('User does not exists'))
@@ -181,7 +181,7 @@ class StudentForm(forms.Form):
     )
     gender = forms.ChoiceField(
         label=_('gender'),
-        choices=Profile.GENDER_CHOICES,
+        choices=User.GENDER_CHOICES,
         widget=forms.Select(attrs={
             'class': 'form-control'
         })
@@ -212,7 +212,7 @@ class StudentForm(forms.Form):
     )
     parent_gender = forms.ChoiceField(
         label=_('gender'),
-        choices=Profile.GENDER_CHOICES,
+        choices=User.GENDER_CHOICES,
         widget=forms.Select(attrs={
             'class': 'form-control'
         })
@@ -270,15 +270,15 @@ class StudentForm(forms.Form):
         parent_phone_number = cleaned_data.get('parent_phone_number')
         parent_address = cleaned_data.get('parent_address')
 
-        new_parent = Profile.objects.create(
+        new_parent = User.objects.create(
             fullname=parent_fullname,
-            user_type=Profile.USER_PARENT,
+            user_type=User.USER_PARENT,
             gender=parent_gender
         )
         new_parent_phonebook = PhoneBook.objects.create(
             address=parent_address,
             phone_number=parent_phone_number,
-            profile=new_parent
+            user=new_parent
         )
 
         # Student Information
@@ -287,16 +287,16 @@ class StudentForm(forms.Form):
         phone_number = cleaned_data.get('phone_number')
         address = cleaned_data.get('address')
 
-        new_student = Profile.objects.create(
+        new_student = User.objects.create(
             fullname=fullname,
-            user_type=Profile.USER_STUDENT,
+            user_type=User.USER_STUDENT,
             gender=gender,
             parent=new_parent
         )
         new_student_phonebook = PhoneBook.objects.create(
             address=address,
             phone_number=phone_number,
-            profile=new_student
+            user=new_student
         )
 
         return new_student

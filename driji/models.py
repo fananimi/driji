@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User as AuthUser
 from django.utils.translation import ugettext_lazy as _
 
 from zkcluster.models import ZKBaseUser
@@ -11,7 +11,7 @@ class BaseModel(models.Model):
     class Meta:
         abstract = True
 
-class Profile(BaseModel, ZKBaseUser):
+class User(BaseModel, ZKBaseUser):
     USER_ADMINISTRATOR = 1
     USER_STAFF = 2
     USER_PARENT = 3
@@ -32,7 +32,7 @@ class Profile(BaseModel, ZKBaseUser):
         (GENDER_FEMALE, _('female'))
     )
 
-    user = models.OneToOneField(User, related_name='profile', blank=True, null=True)
+    auth = models.OneToOneField(AuthUser, related_name='driji_user', blank=True, null=True)
     fullname = models.CharField(_('full name'), max_length=100)
     user_type = models.IntegerField(choices=USER_TYPE, default=USER_STUDENT)
     gender = models.CharField(_('gender'), max_length=1, choices=GENDER_CHOICES, default=GENDER_MALE)
@@ -41,7 +41,7 @@ class Profile(BaseModel, ZKBaseUser):
     NAME_FIELD = 'fullname'
 
     class Meta:
-        db_table = 'driji_profile'
+        db_table = 'driji_user'
 
     @property
     def gender_name(self):
@@ -57,10 +57,10 @@ class Profile(BaseModel, ZKBaseUser):
 class PhoneBook(BaseModel):
     address = models.CharField(_('address'), max_length=200, blank=True, null=True)
     phone_number = models.CharField(_('phone number'), max_length=16, unique=True, db_index=True)
-    profile = models.ForeignKey(Profile, related_name='ponebooks')
+    driji_user = models.ForeignKey(User, related_name='ponebooks')
 
     class Meta:
         db_table = 'driji_phonebook'
 
     def __unicode__(self):
-        return self.profile.fullname
+        return self.driji_user.fullname
