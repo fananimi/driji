@@ -258,38 +258,53 @@ def attendance(request, terminal_id):
     midnight = (today + timezone.timedelta(days=1))
     first_date = timezone.make_aware(timezone.datetime(today.year, today.month, 1))
 
+    attendances = terminal.attendances.filter(
+        timestamp__range=(first_date, midnight),
+        summary__isnull=False
+    ).values(
+        'summary__driji_user_id',
+        'summary__date',
+        'summary__status'
+    )
+    summary = {}
+    for att in attendances:
+        key = str(att['summary__driji_user_id'])
+        if not summary.get(key):
+            summary[key] = {}
+        key_day = att['summary__date'].strftime('%Y%m%d')
+        summary[key][key_day] = att['summary__status']
+
     # generate days number
     days = []
     cal = calendar.monthrange(today.year, today.month)
     for d in range (cal[0]-1, cal[1]+1):
-        days.append(d)
-    # attendances = terminal.attendances.filter(timestamp__range=(first_date, midnight))
-    # from django.db.models import Count
-    # attendances = terminal.attendances.filter(timestamp__range=(first_date, midnight)).values(
-    #     'user__id',
-    #     'user__fullname',
-    #     'timestamp'
-    # )
-    # print attendances
-    # report = {}
-    # for attendance in attendances:
-    #     key = '{}'.format(attendance['user__id'])
-    #     if not report.get(key):
-    #         report[key] = {}
-    #         report[key]['fullname'] = attendance['user__fullname']
-    #         report[key]['attendances'] = [attendance['timestamp']]
-    #     else:
-    #         pass
-
-    # for k in report.keys():
-    #     key = '{}'.format(k)
-    #     print report[key]
+        date = today.replace(day=d).date()
+        days.append(date)
+        if date < midnight.date():
+            for user in users:
+                key = str(user.id)
+                day_key = date.strftime('%Y%m%d')
+                if date.isoweekday() != 7:
+                    if summary.get(key):
+                        if not summary.get(key).get(date.strftime('%Y%m%d')):
+                            summary[key][day_key] = 'a'
+                    else:
+                        summary[key] = {}
+                        summary[key][day_key] = 'a'
+                else:
+                    if summary.get(key):
+                        if not summary.get(key).get(date.strftime('%Y%m%d')):
+                            summary[key][day_key] = 'w'
+                    else:
+                        summary[key] = {}
+                        summary[key][day_key] = 'w'
 
     data = {
         'terminal': terminal,
         'users': users,
         'days': days,
-        'monthname': today.strftime('%B')
+        'monthname': today.strftime('%B'),
+        'summary': summary
     }
     return render(request, 'attendance.html', data)
 

@@ -66,7 +66,7 @@ class PhoneBook(BaseModel):
     def __unicode__(self):
         return self.driji_user.fullname
 
-class AttendanceSumary(BaseModel):
+class AttendanceSummary(BaseModel):
     STATUS_PRESENT = 'p'
     STATUS_ABSENCE = 'a'
     STATUS_LATE = 'l'
@@ -78,7 +78,7 @@ class AttendanceSumary(BaseModel):
     )
 
     driji_user = models.ForeignKey(User, related_name='attendances')
-    zk_attendance = models.OneToOneField(Attendance, related_name='sumary')
+    zk_attendance = models.OneToOneField(Attendance, related_name='summary')
     date = models.DateField()
     status = models.CharField(_('status'), max_length=1, choices=STATUS_CHOICES)
 
@@ -89,8 +89,8 @@ class AttendanceSumary(BaseModel):
             self.status = self.STATUS_LATE
         else:
             self.status = self.STATUS_PRESENT
-        super(AttendanceSumary, self).save(*args, **kwargs)
+        super(AttendanceSummary, self).save(*args, **kwargs)
 
     class Meta:
-        db_table = 'driji_attendance_sumary'
+        db_table = 'driji_attendance_summary'
         unique_together = ('driji_user', 'date')

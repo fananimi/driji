@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% load i18n %}
+{% load attendance_filter %}
 
 {% block breadcrumb %}
 <ol class="breadcrumb navbar-breadcrumb">
@@ -26,12 +27,12 @@
         <table class="table table-reflow">
           <thead>
             <th colspan="32" style="text-align: center;">
-              {{ monthname }}
+              <h4>{{ monthname }}</h4>
             </th>
             <tr>
               <th>{% trans 'Name' %}</th>
-              {% for day in days %}
-                <th>{{ day }}</th>
+              {% for d in days %}
+                <th>{{ d.day }}</th>
               {% endfor %}
             </tr>
           </thead>
@@ -41,8 +42,14 @@
               <th scope="row">
                 {{ user.fullname }}
               </th>
-              {% for day in days %}
-                <td>P</td>
+              {% for d in days %}
+                {% with user_id=user.id date=d|date:"Ymd" %}
+                  {% with data=summary|get_value:user_id %}
+                    {% with status=data|get_value:date %}
+                      <td class="attendance_report center" data-status="{{ status|default:""|upper }}">{{ status|default:""|upper }}</td>
+                    {% endwith %}
+                  {% endwith %}
+                {% endwith  %}
               {% endfor %}
             </tr>
             {% endfor %}
@@ -52,4 +59,28 @@
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    $('.attendance_report').each(function(){
+      var status = $(this).data('status');
+      switch (status) {
+        case 'P':
+          $(this).addClass('success');
+          break;
+        case 'L':
+          $(this).addClass('warning');
+          break;
+        case 'A':
+          $(this).addClass('error');
+          break;
+        case 'W':
+          $(this).css('background', 'red');
+          break;
+        default:
+          break
+      }
+    });
+  </script>
 {% endblock %}
