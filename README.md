@@ -1,4 +1,7 @@
 ### Selamat datang di Driji.
+
+![Driji Screenshot](https://raw.githubusercontent.com/fananimi/driji/master/driji/static/img/screenshots/driji_attendance_report.png)
+
 Driji adalah sebuah aplikasi kehadiran berbasis sidik jari untuk sekolah. Aplikasi ini di kembangkan dengan maksud untuk membantu sekolah dalam mengelola sistem kehadiran yang lebih rapi dan tersitem.
 
 ### Kebutuhan Sistem
