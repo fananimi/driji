@@ -250,6 +250,8 @@ def student_add(request):
     }
     return render(request, 'student_add.html', data)
 
+@alowed(['GET'])
+@login_required
 def attendance(request, terminal_id):
     terminal = get_object_or_404(Terminal, pk=terminal_id)
     users = terminal.user_set.all()
@@ -303,7 +305,7 @@ def attendance(request, terminal_id):
         'terminal': terminal,
         'users': users,
         'days': days,
-        'monthname': today.strftime('%B'),
+        'today': today,
         'summary': summary
     }
     return render(request, 'attendance.html', data)
