@@ -27,5 +27,8 @@ Diji mudah di operasikan melalui perambah (*browser*) secara daring (*online*).
 ***Freedom*** : 
 Driji dilisensikan di bawah GPL yang diciptakan untuk melindungi kebebasan Anda. Anda bebas untuk menggunakan Driji dengan cara apapun yang Anda pilih: menginstalnya, menggunakannya, memodifikasi, mendistribusikannya.
 
+**Internationalization**:
+Kami sangat menhargai suatu budaya local, oleh karena itu Driji didukung dengan fitur internasionalisasi dengan demikian Driji dapat di akses dengan mutli bahasa. Untuk saat ini Driji hanya mendukung Bahasa Indonesia dan Bahasa Inggris.
+
 ### Dukungan atau kontak
 Kami sangat terbuka mendengar masukan dari siap saja yang ingin bersama-sama mengembangkan Driji. Setiap pertanyaan bisa langsung menyebut (*mention*) @fananimi  atau melalui japi ke fanani.mi@gmail.com.
