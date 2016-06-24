@@ -101,8 +101,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # https://docs.djangoproject.com/en/1.9/topics/i18n/
 
 LANGUAGES = [
-  ('id', 'Bahasa Indonesia'),
-  ('en', 'English'),
+    ('id', 'Bahasa Indonesia'),
+    ('en', 'English')
 ]
 
 LANGUAGE_CODE = 'en-us'
@@ -127,6 +127,7 @@ LOGOUT_URL = '/logout/'
 ZK_USER_MODEL = 'driji.User'
 
 try:
+    # overide for local settings
     from settings_local import *
 except ImportError:
     pass

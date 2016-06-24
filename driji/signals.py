@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-from django.dispatch.dispatcher import receiver
 from django.db import IntegrityError
 from django.db.models.signals import post_save
+from django.dispatch.dispatcher import receiver
+
+from driji.models import AttendanceSummary
 
 from zkcluster.models import Attendance
 
-from driji.models import AttendanceSummary
 
 @receiver(post_save, sender=Attendance)
 def on_attendance_save(**kwargs):

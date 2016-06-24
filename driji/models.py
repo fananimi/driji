@@ -1,9 +1,10 @@
 # -*- coding: utf-8 -*-
-from django.db import models
 from django.contrib.auth.models import User as AuthUser
+from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from zkcluster.models import ZKBaseUser, Attendance
+from zkcluster.models import Attendance, ZKBaseUser
+
 
 class BaseModel(models.Model):
     created_at = models.DateTimeField(_('created at'), auto_now_add=True)
@@ -11,6 +12,7 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
+
 
 class User(BaseModel, ZKBaseUser):
     USER_ADMINISTRATOR = 1
@@ -66,6 +68,7 @@ class PhoneBook(BaseModel):
     def __unicode__(self):
         return self.driji_user.fullname
 
+
 class AttendanceSummary(BaseModel):
     STATUS_PRESENT = 'p'
     STATUS_ABSENCE = 'a'
@@ -85,7 +88,7 @@ class AttendanceSummary(BaseModel):
     def save(self, *args, **kwargs):
         timestamp = self.zk_attendance.timestamp
         late_time = timestamp.replace(hour=8, minute=0, microsecond=0)
-        if  timestamp >= late_time:
+        if timestamp >= late_time:
             self.status = self.STATUS_LATE
         else:
             self.status = self.STATUS_PRESENT

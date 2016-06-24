@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 from django import forms
-from django.utils.translation import ugettext as _
 from django.contrib.auth import authenticate
 from django.contrib.auth.models import User as AuthUser
+from django.utils.translation import ugettext as _
+
+from driji.models import PhoneBook, User
 
 from zkcluster.models import Terminal
 
-from driji.models import User, PhoneBook
-
 # from .models import Student, Grade
+
 
 class LoginForm(forms.Form):
     identifier = forms.CharField(
@@ -61,6 +62,7 @@ class LoginForm(forms.Form):
 
         return user
 
+
 class ScanTerminalForm(forms.Form):
     ip = forms.CharField(
         label=_('IP Address'),
@@ -96,6 +98,7 @@ class ScanTerminalForm(forms.Form):
         if terminal:
             raise forms.ValidationError(_('IP already exists'))
         return ip
+
 
 class AddTerminalForm(forms.ModelForm, ScanTerminalForm):
     serialnumber = forms.CharField(
@@ -158,6 +161,7 @@ class AddTerminalForm(forms.ModelForm, ScanTerminalForm):
                 raise forms.ValidationError(_('This field is required.'))
         return name
 
+
 class EditTerminalForm(AddTerminalForm):
     def __init__(self, *args, **kwargs):
         super(EditTerminalForm, self).__init__(*args, **kwargs)
@@ -169,6 +173,7 @@ class EditTerminalForm(AddTerminalForm):
         self.fields['port'].widget = forms.TextInput(attrs={
             'class': 'form-control'
         })
+
 
 class StudentForm(forms.Form):
     # student information
@@ -276,7 +281,7 @@ class StudentForm(forms.Form):
             user_type=User.USER_PARENT,
             gender=parent_gender
         )
-        new_parent_phonebook = PhoneBook.objects.create(
+        PhoneBook.objects.create(
             address=parent_address,
             phone_number=parent_phone_number,
             user=new_parent
@@ -294,7 +299,7 @@ class StudentForm(forms.Form):
             gender=gender,
             parent=new_parent
         )
-        new_student_phonebook = PhoneBook.objects.create(
+        PhoneBook.objects.create(
             address=address,
             phone_number=phone_number,
             user=new_student

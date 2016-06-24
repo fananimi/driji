@@ -2,25 +2,29 @@
 import calendar
 
 from django.contrib import messages
-from django.contrib.auth import logout, login
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
-from django.shortcuts import render, redirect, get_object_or_404
-from django.utils.translation import ugettext as _
+from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
+from django.utils.translation import ugettext as _
 from django.views.decorators.http import require_http_methods as alowed
 
-from zk.exception import ZKError
-from zkcluster.models import Terminal, Attendance
-
+from driji.forms import AddTerminalForm, EditTerminalForm, LoginForm, \
+    ScanTerminalForm, StudentForm
 from driji.models import User
-from driji.forms import LoginForm, ScanTerminalForm, AddTerminalForm, EditTerminalForm, StudentForm
+
+from zk.exception import ZKError
+
+from zkcluster.models import Terminal
+
 
 @alowed(['GET'])
 @login_required
 def index(request):
     return redirect('terminal')
     # return render(request, 'index.html')
+
 
 @alowed(['GET', 'POST'])
 def login_view(request):
@@ -40,12 +44,14 @@ def login_view(request):
 
     return render(request, 'login.html', {'form': form})
 
+
 @alowed(['GET'])
 def logout_views(request):
     if not request.user.is_authenticated():
         raise Http404()
     logout(request)
     return redirect('index')
+
 
 @alowed(['GET'])
 @login_required
@@ -55,6 +61,7 @@ def terminal(request):
         'terminals': terminals
     }
     return render(request, 'terminal.html', data)
+
 
 @alowed(['POST'])
 @login_required
@@ -76,6 +83,7 @@ def terminal_add(request):
         'form': form
     }
     return render(request, 'terminal_add.html', data)
+
 
 @alowed(['GET', 'POST'])
 @login_required
@@ -110,6 +118,7 @@ def terminal_scan(request):
 
     return render(request, 'terminal_scan.html', data)
 
+
 @alowed(['GET', 'POST'])
 @login_required
 def terminal_edit(request, terminal_id):
@@ -128,6 +137,7 @@ def terminal_edit(request, terminal_id):
     }
     return render(request, 'terminal_edit.html', data)
 
+
 @alowed(['POST'])
 @login_required
 def terminal_sync_report(request, terminal_id):
@@ -143,6 +153,7 @@ def terminal_sync_report(request, terminal_id):
         return redirect(next_url)
 
     return redirect('terminal')
+
 
 @alowed(['POST'])
 @login_required
@@ -160,6 +171,7 @@ def terminal_restart(request, terminal_id):
         return redirect(next_url)
 
     return redirect('terminal')
+
 
 @alowed(['POST'])
 @login_required
@@ -179,6 +191,7 @@ def terminal_poweroff(request, terminal_id):
 
     return redirect('terminal')
 
+
 @alowed(['POST'])
 @login_required
 def terminal_voice(request, terminal_id):
@@ -196,6 +209,7 @@ def terminal_voice(request, terminal_id):
 
     return redirect('terminal')
 
+
 @alowed(['POST'])
 @login_required
 def terminal_format(request, terminal_id):
@@ -212,6 +226,7 @@ def terminal_format(request, terminal_id):
 
     return redirect('terminal')
 
+
 @alowed(['POST'])
 @login_required
 def terminal_delete(request, terminal_id):
@@ -227,6 +242,7 @@ def terminal_delete(request, terminal_id):
         return redirect(next_url)
 
     return redirect('terminal')
+
 
 @alowed(['GET', 'POST'])
 @login_required
@@ -248,6 +264,7 @@ def terminal_action(request, action, terminal_id):
     else:
         raise Http404("Action doest not allowed")
 
+
 @alowed(['GET'])
 @login_required
 def terminal_detail(request, terminal_id):
@@ -258,7 +275,7 @@ def terminal_detail(request, terminal_id):
     days = []
     now = timezone.now()
     cal = calendar.monthrange(now.year, now.month)
-    for d in range (cal[0]-1, cal[1]+1):
+    for d in range(cal[0] - 1, cal[1] + 1):
         days.append(d)
 
     data = {
@@ -268,6 +285,7 @@ def terminal_detail(request, terminal_id):
     }
     return render(request, 'terminal_detail.html', data)
 
+
 @alowed(['GET'])
 @login_required
 def student(request):
@@ -276,6 +294,7 @@ def student(request):
         'students': students
     }
     return render(request, 'student.html', data)
+
 
 @alowed(['GET', 'POST'])
 @login_required
@@ -289,6 +308,7 @@ def student_add(request):
         'form': form
     }
     return render(request, 'student_add.html', data)
+
 
 @alowed(['GET'])
 @login_required
@@ -319,7 +339,7 @@ def attendance(request, terminal_id):
     # generate days number
     days = []
     cal = calendar.monthrange(today.year, today.month)
-    for d in range (cal[0]-1, cal[1]+1):
+    for d in range(cal[0] - 1, cal[1] + 1):
         date = today.replace(day=d).date()
         days.append(date)
         if date < midnight.date():
@@ -349,6 +369,7 @@ def attendance(request, terminal_id):
         'summary': summary
     }
     return render(request, 'attendance.html', data)
+
 
 @alowed(['GET'])
 @login_required
