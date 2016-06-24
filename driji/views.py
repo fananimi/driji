@@ -18,7 +18,8 @@ from driji.forms import LoginForm, ScanTerminalForm, AddTerminalForm, EditTermin
 @alowed(['GET'])
 @login_required
 def index(request):
-    return render(request, 'index.html')
+    return redirect('terminal')
+    # return render(request, 'index.html')
 
 @alowed(['GET', 'POST'])
 def login_view(request):
