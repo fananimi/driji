@@ -23,6 +23,8 @@ urlpatterns = [
 
     url(r'^attendance/(?P<terminal_id>[0-9]+)/$$', views.attendance, name='attendance'),
 
+    url(r'^sms/$', views.sms, name='sms'),
+
     url(r'^settings/grade/$', views.index, name='settings_grade'),
     url(r'^settings/grade/add/$', views.index, name='settings_grade_add')
 ]

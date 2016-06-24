@@ -349,6 +349,11 @@ def attendance(request, terminal_id):
     }
     return render(request, 'attendance.html', data)
 
+@alowed(['GET'])
+@login_required
+def sms(request):
+    return render(request, 'sms.html')
+
 # @alowed(['GET'])
 # @login_required
 # def settings_grade(request):
