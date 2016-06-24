@@ -128,6 +128,22 @@ def terminal_edit(request, terminal_id):
 
 @alowed(['POST'])
 @login_required
+def terminal_sync_report(request, terminal_id):
+    terminal = get_object_or_404(Terminal, pk=terminal_id)
+    try:
+        terminal.sync_report()
+        messages.add_message(request, messages.SUCCESS, _('%(terminal)s has synced') % {'terminal': terminal})
+    except ZKError, e:
+        messages.add_message(request, messages.ERROR, str(e))
+
+    next_url = request.GET.get('next')
+    if next_url:
+        return redirect(next_url)
+
+    return redirect('terminal')
+
+@alowed(['POST'])
+@login_required
 def terminal_restart(request, terminal_id):
     terminal = get_object_or_404(Terminal, pk=terminal_id)
     try:
@@ -136,6 +152,10 @@ def terminal_restart(request, terminal_id):
         messages.add_message(request, messages.SUCCESS, _('%(terminal)s has restarted') % {'terminal': terminal})
     except ZKError, e:
         messages.add_message(request, messages.ERROR, str(e))
+
+    next_url = request.GET.get('next')
+    if next_url:
+        return redirect(next_url)
 
     return redirect('terminal')
 
@@ -151,6 +171,10 @@ def terminal_poweroff(request, terminal_id):
     except ZKError, e:
         messages.add_message(request, messages.ERROR, str(e))
 
+    next_url = request.GET.get('next')
+    if next_url:
+        return redirect(next_url)
+
     return redirect('terminal')
 
 @alowed(['POST'])
@@ -164,6 +188,10 @@ def terminal_voice(request, terminal_id):
     except ZKError, e:
         messages.add_message(request, messages.ERROR, str(e))
 
+    next_url = request.GET.get('next')
+    if next_url:
+        return redirect(next_url)
+
     return redirect('terminal')
 
 @alowed(['POST'])
@@ -175,6 +203,10 @@ def terminal_format(request, terminal_id):
         messages.add_message(request, messages.SUCCESS, _('%(terminal)s has formated') % {'terminal': terminal})
     except ZKError, e:
         messages.add_message(request, messages.ERROR, str(e))
+
+    next_url = request.GET.get('next')
+    if next_url:
+        return redirect(next_url)
 
     return redirect('terminal')
 
@@ -188,6 +220,10 @@ def terminal_delete(request, terminal_id):
     except ZKError, e:
         messages.add_message(request, messages.ERROR, str(e))
 
+    next_url = request.GET.get('next')
+    if next_url:
+        return redirect(next_url)
+
     return redirect('terminal')
 
 @alowed(['GET', 'POST'])
@@ -195,6 +231,8 @@ def terminal_delete(request, terminal_id):
 def terminal_action(request, action, terminal_id):
     if action == 'edit':
         return terminal_edit(request, terminal_id)
+    elif action == 'sync_report':
+        return terminal_sync_report(request, terminal_id)
     elif action == 'restart':
         return terminal_restart(request, terminal_id)
     elif action == 'poweroff':

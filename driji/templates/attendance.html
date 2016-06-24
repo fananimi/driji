@@ -4,65 +4,75 @@
 {% load attendance_filter %}
 
 {% block breadcrumb %}
-<ol class="breadcrumb navbar-breadcrumb">
-  <li>
-    {% trans 'Attendance' %}
-  </li>
-  <li class="active">
-    {{ terminal.name }}
-  </li>
-</ol>
+  <ol class="breadcrumb navbar-breadcrumb">
+    <li>
+      {% trans 'Attendance' %}
+    </li>
+    <li class="active">
+      {{ terminal.name }}
+    </li>
+  </ol>
 {% endblock %}
 
 {% block content %}
-<div class="row">
-  <div class="col-xs-12">
-    <div class="card">
-      <div class="card-header">
-        <div class="card-title">
-          <div class="title">{% trans 'Attendance Report' %} {{ today|date:"b Y"|upper }}</div>
+  <form method="POST" action="{% url 'terminal_action' 'sync_report' terminal.id %}?next={% url 'attendance' terminal.id %}" id="zk_sync_report">
+    {% csrf_token %}
+    <button type="button" name="button" class="btn btn-primary">
+        {% trans 'Sync Report' %}
+    </button>
+  </form>
+  <div class="row">
+    <div class="col-xs-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+            <div class="title">{% trans 'Attendance Report' %} {{ today|date:"b Y"|upper }}</div>
+          </div>
         </div>
-      </div>
-      <div class="card-body">
-        <table class="table table-reflow">
-          <thead>
-            <th colspan="32" style="text-align: center;">
-              <h4>{{ today|date:"b Y"|upper }}</h4>
-            </th>
-            <tr>
-              <th>{% trans 'Name' %}</th>
-              {% for d in days %}
-                <th>{{ d.day }}</th>
-              {% endfor %}
-            </tr>
-          </thead>
-          <tbody>
-            {% for user in users %}
-            <tr>
-              <th scope="row">
-                {{ user.fullname }}
+        <div class="card-body">
+          <table class="table table-reflow">
+            <thead>
+              <th colspan="32" style="text-align: center;">
+                <h4>{{ today|date:"b Y"|upper }}</h4>
               </th>
-              {% for d in days %}
-                {% with user_id=user.id date=d|date:"Ymd" %}
-                  {% with data=summary|get_value:user_id %}
-                    {% with status=data|get_value:date %}
-                      <td class="attendance_report center" data-status="{{ status|default:""|upper }}">{{ status|default:""|upper }}</td>
+              <tr>
+                <th>{% trans 'Name' %}</th>
+                {% for d in days %}
+                  <th>{{ d.day }}</th>
+                {% endfor %}
+              </tr>
+            </thead>
+            <tbody>
+              {% for user in users %}
+              <tr>
+                <th scope="row">
+                  {{ user.fullname }}
+                </th>
+                {% for d in days %}
+                  {% with user_id=user.id date=d|date:"Ymd" %}
+                    {% with data=summary|get_value:user_id %}
+                      {% with status=data|get_value:date %}
+                        <td class="attendance_report center" data-status="{{ status|default:""|upper }}">{{ status|default:""|upper }}</td>
+                      {% endwith %}
                     {% endwith %}
-                  {% endwith %}
-                {% endwith  %}
+                  {% endwith  %}
+                {% endfor %}
+              </tr>
               {% endfor %}
-            </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-</div>
 {% endblock %}
 
 {% block script %}
   <script>
+    $('#zk_sync_report').click(function(){
+      $(this).submit();
+    });
+
     $('.attendance_report').each(function(){
       var status = $(this).data('status');
       switch (status) {
