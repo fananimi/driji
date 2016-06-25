@@ -9,7 +9,7 @@ Driji adalah sebuah aplikasi kehadiran berbasis sidik jari untuk sekolah. Aplika
 * Sistem operasi Linux (direkomendasikan Ubuntu)
 * Python sebagai bahasa pemrogamam utama
 * Web Server Apache atau Nginx (direkomendasikan nginx)
-* Database MySQL / PostgreSQL
+* Database MySQL atau PostgreSQL (direkomendasikan PostgreSQL)
 * Mesin presensi sidik jari produksi ZKSoftware
 
 ### Fitur :
