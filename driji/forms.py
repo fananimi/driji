@@ -284,7 +284,7 @@ class StudentForm(forms.Form):
         PhoneBook.objects.create(
             address=parent_address,
             phone_number=parent_phone_number,
-            user=new_parent
+            driji_user=new_parent
         )
 
         # Student Information
@@ -302,7 +302,7 @@ class StudentForm(forms.Form):
         PhoneBook.objects.create(
             address=address,
             phone_number=phone_number,
-            user=new_student
+            driji_user=new_student
         )
 
         return new_student
