@@ -14,6 +14,8 @@ from driji.forms import AddTerminalForm, EditTerminalForm, LoginForm, \
     ScanTerminalForm, StudentForm
 from driji.models import User
 
+from layang.models import Message
+
 from zk.exception import ZKError
 
 from zkcluster.models import Terminal
@@ -374,7 +376,11 @@ def attendance(request, terminal_id):
 @alowed(['GET'])
 @login_required
 def sms(request):
-    return render(request, 'sms.html')
+    list_sms = Message.objects.all()
+    data = {
+        'list_sms': list_sms
+    }
+    return render(request, 'sms.html', data)
 
 # @alowed(['GET'])
 # @login_required

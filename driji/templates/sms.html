@@ -22,22 +22,41 @@
     <div class="card-body no-padding">
       <div class="step tabs-left card-no-padding">
         <ul class="nav nav-tabs" role="tablist">
-          <li role="step" class="active">
-            <a href="#stepv1" id="step1-vtab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
-              <div class="icon fa fa-user"></div>
-              <div class="step-title">
-                <div class="title">081296968630</div>
-                <div class="description">Hello Fanani M. Ihsan</div>
-              </div>
-            </a>
-          </li>
+          {% with first_sms=list_sms.0 %}
+            <li role="step" class="active">
+              <a href="#sms_{{ first_sms.id }}" id="first_sms_{{ sms.id }}-vtab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
+                <div class="icon fa fa-user"></div>
+                <div class="step-title">
+                  <div class="title">{{ first_sms.recipient }}</div>
+                  <div class="description">{{ first_sms.message }}</div>
+                </div>
+              </a>
+            </li>
+          {% endwith %}
+          {% for sms in list_sms|slice:"1:" %}
+            <li role="step">
+              <a href="#sms_{{ sms.id }}" id="sms_{{ sms.id }}-vtab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
+                <div class="icon fa fa-user"></div>
+                <div class="step-title">
+                  <div class="title">{{ sms.recipient }}</div>
+                  <div class="description">{{ sms.message }}</div>
+                </div>
+              </a>
+            </li>
+          {% endfor %}
         </ul>
-          <div class="tab-content">
-            <div role="tabpanel" class="tab-pane fade active in" id="stepv1" aria-labelledby="home-tab">
-              <p>1</p>
+        <div class="tab-content">
+          {% with first_sms=list_sms.0 %}
+            <div role="tabpanel" class="tab-pane fade active in" id="sms_{{ first_sms.id }}" aria-labelledby="home-tab">
+              <p>{{ first_sms.message }}</p>
             </div>
+          {% endwith %}
+          {% for sms in list_sms|slice:"1:" %}
+            <div role="tabpanel" class="tab-pane fade in" id="sms_{{ sms.id }}" aria-labelledby="home-tab">
+              <p>{{ sms.message }}</p>
             </div>
-          </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
