@@ -15,24 +15,12 @@
 {% endblock %}
 
 {% block content %}
-  <div class="row">
-    <div class="col-xs-1">
-      <form method="POST" action="{% url 'terminal_action' 'sync_report' terminal.id %}?next={% url 'attendance' terminal.id %}" id="zk_sync_report">
-        {% csrf_token %}
-        <button type="button" name="button" class="btn btn-primary">
-            {% trans 'Sync Report' %}
-        </button>
-      </form>
-    </div>
-    <div class="col-xs-1">
-      <form method="POST" action="{% url 'sms_parent' %}" id="sms_parent">
-        {% csrf_token %}
-        <button type="button" name="button" class="btn btn-primary">
-            {% trans 'SMS Parent' %}
-        </button>
-      </form>
-    </div>
-  </div>
+  <form method="POST" action="{% url 'terminal_action' 'sync_report' terminal.id %}?next={% url 'attendance' terminal.id %}" id="zk_sync_report">
+      {% csrf_token %}
+    <button type="button" name="button" class="btn btn-primary">
+      {% trans 'Sync Report' %}
+    </button>
+  </form>
   <div class="row">
     <div class="col-xs-12">
       <div class="card">
@@ -82,10 +70,6 @@
 {% block script %}
   <script>
     $('#zk_sync_report').click(function(){
-      $(this).submit();
-    });
-
-    $('#sms_parent').click(function(){
       $(this).submit();
     });
 
