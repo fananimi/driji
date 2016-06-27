@@ -344,12 +344,10 @@ def student_add_terminal(request):
                     messages.add_message(request, messages.WARNING, _('No terminal selected.'))
                 else:
                     terminals = Terminal.objects.filter(id__in=terminal_id_list)
-                    students = User.objects.filter(id__in=student_id_list)
 
                     for terminal in terminals:
                         try:
-                            for student in students:
-                                student.terminals.add(terminal)
+                            terminal.add_users(student_id_list)
                             return redirect('student')
                         except ZKError, e:
                             err_msg = '[{}] {}'.format(terminal.name, e)
