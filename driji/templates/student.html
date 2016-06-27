@@ -23,46 +23,76 @@
         <div class="title">{% trans 'Student List' %}</div>
         </div>
       </div>
-      <div class="card-body">
-        <table class="table table-striped" cellspacing="0" width="100%">
-          <thead>
-            <tr>
-              <th scope="col" class="action-checkbox-column">
-                  <div class="text"><span><input type="checkbox" id="action-toggle"></span></div>
-                  <div class="clear"></div>
-                </th>
-              <th>{% trans 'Name' %}</th>
-              <th>{% trans 'Gender' %}</th>
-              <th>{% trans 'Parent' %}</th>
-            </tr>
-          </thead>
-          <tfoot>
-            <tr>
-              <th scope="col" class="action-checkbox-column">
-                  <div class="text"><span><input type="checkbox" id="action-toggle"></span></div>
-                  <div class="clear"></div>
-                </th>
-              <th>{% trans 'Name' %}</th>
-              <th>{% trans 'Gender' %}</th>
-              <th>{% trans 'Parent' %}</th>
-            </tr>
-          </tfoot>
-          <tbody>
-            {% for student in students %}
+      <form action="" method="POST">
+
+        <div class="card-body" style="margin-bottom: 80px;">
+          <div class="actions">
+            <label>{% trans 'Action' %}:
+              <select name="action">
+                <option value="" selected="selected">---------</option>
+                <option value="upload_selected">{% trans 'Upload to terminals' %}</option>
+                <option value="delete_selected">{% trans 'Delete selected users' %}</option>
+            </label>
+            {% csrf_token %}
+            <button type="submit" class="btn btn-default" title="Run the selected action" value="0">{% trans 'Go' %}</button>
+          </div>
+          <table class="table table-striped" cellspacing="0" width="100%">
+            <thead>
               <tr>
                 <th scope="col" class="action-checkbox-column">
-                  <div class="text"><span><input type="checkbox" id="action-toggle"></span></div>
-                  <div class="clear"></div>
+                  <div class="text">
+                    <span>
+                      <input type="checkbox" id="select-all">
+                    </span>
+                  </div>
                 </th>
-                <td>{{ student.fullname }}</td>
-                <td>{{ student.gender_name }}</td>
-                <td>{{ student.parent.fullname }}</td>
+                <th>{% trans 'Name' %}</th>
+                <th>{% trans 'Gender' %}</th>
+                <th>{% trans 'Parent' %}</th>
               </tr>
-            {% endfor %}
-          </tbody>
-        </table>
-      </div>
+            </thead>
+            <tbody>
+              {% for student in students %}
+                <tr>
+                  <th scope="col" class="action-checkbox-column">
+                    <div class="text">
+                      <span>
+                        <input name="id_list" value={{ student.id }} type="checkbox" class='checkbox-column'>
+                      </span>
+                    </div>
+                  </th>
+                  <td>{{ student.fullname }}</td>
+                  <td>{{ student.gender_name }}</td>
+                  <td>{{ student.parent.fullname }}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </form>
     </div>
   </div>
 </div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    $('#select-all:checkbox').change(function(){
+      var state = $(this).is(':checked');
+      $('.checkbox-column').prop('checked', state);
+    });
+    var is_all_checked = function(){
+      var total_checked = $('.checkbox-column:checked').length;
+      var total = $('.checkbox-column').length;
+      if (total == total_checked){
+        return true;
+      }
+      return false;
+    };
+    $('.checkbox-column').each(function(){
+      $(this).change(function(){
+        $('#select-all:checkbox').prop('checked', is_all_checked());
+      });
+    });
+  </script>
 {% endblock %}

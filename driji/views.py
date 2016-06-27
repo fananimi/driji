@@ -288,9 +288,15 @@ def terminal_detail(request, terminal_id):
     return render(request, 'terminal_detail.html', data)
 
 
-@alowed(['GET'])
+@alowed(['GET', 'POST'])
 @login_required
 def student(request):
+    if request.POST:
+        print request.POST
+        action = request.POST.get('action')
+        if not action:
+            messages.add_message(request, messages.WARNING, _('No action selected.'))
+
     students = User.objects.filter(user_type=User.USER_STUDENT)
     data = {
         'students': students
