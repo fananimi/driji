@@ -20,6 +20,7 @@ urlpatterns = [
     url(r'^terminal/(?P<action>[\w-]+)/(?P<terminal_id>[0-9]+)/$', views.terminal_action, name='terminal_action'),
 
     url(r'^student/$', views.student, name='student'),
+    url(r'^student/add/terminal$', views.student_add_terminal, name='student_add_terminal'),
     url(r'^student/add/$', views.student_add, name='student_add'),
 
     url(r'^attendance/(?P<terminal_id>[0-9]+)/$$', views.attendance, name='attendance'),

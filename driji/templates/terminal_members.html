@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb navbar-breadcrumb">
+  <li class="active">
+    <a href="{% url 'terminal' %}">
+      {% trans 'Terminal' %}
+    </a>
+  </li>
+  <li>
+    {{ terminal.name }}
+  </li>
+  <li class="active">
+    {% trans 'Members' %}
+  </li>
+</ol>
+{% endblock %}

@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load i18n %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb navbar-breadcrumb">
+  <li>
+    <a href="{% url 'student' %}">
+      {% trans 'Student' %}
+    </a>
+  </li>
+  <li class="active">
+    {% trans 'Add to Terminal' %}
+  </li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<form method="POST" action="">
+  {% csrf_token %}
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="card" style="padding-bottom: 45px;">
+        <div class="card-header">
+          <div class="card-title">
+          <div class="title">{% trans 'User List' %}</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="panel-body">
+            <table class="table table-striped" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th scope="col">
+                    <div class="text">
+                      <span>
+                        <input type="checkbox" checked="checked" onclick="return false">
+                      </span>
+                    </div>
+                  </th>
+                  <th>{% trans 'Name' %}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for student in students %}
+                  <tr>
+                  <th scope="col">
+                    <div class="text">
+                      <span>
+                        <input name="student_id_list" value={{ student.id }} type="checkbox" checked="checked" onclick="return false">
+                      </span>
+                    </div>
+                  </th>
+                    <td>{{ student.fullname }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">
+          <div class="title">{% trans 'Select Terminal' %}</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="panel-body">
+            <table class="table table-striped" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th scope="col">
+                    <div class="text">
+                      <span>
+                        <input type="checkbox" id="select-all">
+                      </span>
+                    </div>
+                  </th>
+                  <th>{% trans 'Name' %}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for terminal in terminals %}
+                  <tr>
+                    <th scope="col">
+                      <div class="text">
+                        <span>
+                          <input name="terminal_id_list" value={{ terminal.id }} type="checkbox" class='checkbox-column'>
+                        </span>
+                      </div>
+                    </th>
+                    <td>{{ terminal.name }}</td>
+                  </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+          <div class="form-group">
+            <button name="action" value="upload_selected_commit" type="submit" class="btn btn-primary" style="float: right; margin-bottom: 30px; margin-right: 15px;">{% trans 'Apply' %}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+{% endblock  %}
+
+{% block script %}
+  <script>
+    $('#select-all:checkbox').change(function(){
+      var state = $(this).is(':checked');
+      $('.checkbox-column').prop('checked', state);
+    });
+    var is_all_checked = function(){
+      var total_checked = $('.checkbox-column:checked').length;
+      var total = $('.checkbox-column').length;
+      if (total == total_checked){
+        return true;
+      }
+      return false;
+    };
+    $('.checkbox-column').each(function(){
+      $(this).change(function(){
+        $('#select-all:checkbox').prop('checked', is_all_checked());
+      });
+    });
+  </script>
+{% endblock %}

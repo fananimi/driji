@@ -121,6 +121,16 @@ def terminal_scan(request):
     return render(request, 'terminal_scan.html', data)
 
 
+@alowed(['GET'])
+@login_required
+def terminal_members(request, terminal_id):
+    terminal = get_object_or_404(Terminal, pk=terminal_id)
+    data = {
+        'terminal': terminal
+    }
+    return render(request, 'terminal_members.html', data)
+
+
 @alowed(['GET', 'POST'])
 @login_required
 def terminal_edit(request, terminal_id):
@@ -249,7 +259,9 @@ def terminal_delete(request, terminal_id):
 @alowed(['GET', 'POST'])
 @login_required
 def terminal_action(request, action, terminal_id):
-    if action == 'edit':
+    if action == 'members':
+        return terminal_members(request, terminal_id)
+    elif action == 'edit':
         return terminal_edit(request, terminal_id)
     elif action == 'sync_report':
         return terminal_sync_report(request, terminal_id)
@@ -288,15 +300,9 @@ def terminal_detail(request, terminal_id):
     return render(request, 'terminal_detail.html', data)
 
 
-@alowed(['GET', 'POST'])
+@alowed(['GET'])
 @login_required
 def student(request):
-    if request.POST:
-        print request.POST
-        action = request.POST.get('action')
-        if not action:
-            messages.add_message(request, messages.WARNING, _('No action selected.'))
-
     students = User.objects.filter(user_type=User.USER_STUDENT)
     data = {
         'students': students
@@ -316,6 +322,50 @@ def student_add(request):
         'form': form
     }
     return render(request, 'student_add.html', data)
+
+
+@alowed(['POST', 'GET'])
+@login_required
+def student_add_terminal(request):
+    if request.POST:
+        action = request.POST.get('action')
+        if action in ['upload_selected', 'upload_selected_commit']:
+            if action == 'upload_selected':
+                student_id_list = request.POST.getlist('student_id_list')
+                if not student_id_list:
+                    messages.add_message(request, messages.WARNING, _('No student selected.'))
+                    return redirect('student')
+            if action == 'upload_selected_commit':
+                student_id_list = request.POST.getlist('student_id_list')
+                terminal_id_list = request.POST.getlist('terminal_id_list')
+                if not student_id_list:
+                    messages.add_message(request, messages.WARNING, _('No student selected.'))
+                if not terminal_id_list:
+                    messages.add_message(request, messages.WARNING, _('No terminal selected.'))
+                else:
+                    terminals = Terminal.objects.filter(id__in=terminal_id_list)
+                    students = User.objects.filter(id__in=student_id_list)
+
+                    for terminal in terminals:
+                        try:
+                            for student in students:
+                                student.terminals.add(terminal)
+                            return redirect('student')
+                        except ZKError, e:
+                            err_msg = '[{}] {}'.format(terminal.name, e)
+                            messages.add_message(request, messages.ERROR, err_msg)
+
+            students = User.objects.filter(id__in=student_id_list)
+            terminals = Terminal.objects.all()
+            data = {
+                'students': students,
+                'terminals': terminals
+            }
+            return render(request, 'student_add_terminal.html', data)
+        else:
+            messages.add_message(request, messages.WARNING, _('No action selected.'))
+
+    return redirect('student')
 
 
 @alowed(['GET'])
