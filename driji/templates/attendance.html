@@ -52,7 +52,9 @@
                   {% with user_id=user.id date=d|date:"Ymd" %}
                     {% with data=summary|get_value:user_id %}
                       {% with status=data|get_value:date %}
-                        <td class="attendance_report center" data-status="{{ status|default:""|upper }}">{{ status|default:""|upper }}</td>
+                        <td class="attendance_report center" data-status="{{ status|default:""|upper }}">
+                          <button class="btn btn-xs">{{ status|default:""|upper }}</button>
+                        </td>
                       {% endwith %}
                     {% endwith %}
                   {% endwith  %}
@@ -69,7 +71,7 @@
               <button class="btn btn-xs btn-success">A</button> {% trans 'present' %}
             </div>
             <div class="col-xs-3">
-              <button class="btn btn-xs">A</button> {% trans 'absense' %}
+              <button class="btn btn-xs btn-default">A</button> {% trans 'absense' %}
             </div>
             <div class="col-xs-3">
               <button class="btn btn-xs btn-warning">A</button> {% trans 'late' %}
@@ -94,18 +96,24 @@
       var status = $(this).data('status');
       switch (status) {
         case 'P':
-          $(this).addClass('success');
+          $(this).css('padding', 0);
+          $(this).children('button').addClass('btn-success');
           break;
         case 'L':
-          $(this).addClass('warning');
+          $(this).css('padding', 0);
+          $(this).children('button').addClass('btn-warning');
           break;
         case 'A':
-          $(this).addClass('error');
+          $(this).css('padding', 0);
+          $(this).children('button').addClass('btn-default');
           break;
         case 'W':
-          $(this).css('background', 'red');
+          $(this).css('padding', 0);
+          $(this).children('button').addClass('btn-danger');
           break;
         default:
+          $(this).css('padding', 0);
+          $(this).children('button').remove();
           break
       }
     });
