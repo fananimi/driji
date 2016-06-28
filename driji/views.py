@@ -61,6 +61,14 @@ def logout_views(request):
 @login_required
 def terminal(request):
     terminals = Terminal.objects.all()
+    paginator = Paginator(terminals, settings.PAGINATION_NUMBER)
+    page = request.GET.get('page')
+    try:
+        terminals = paginator.page(page)
+    except PageNotAnInteger:
+        terminals = paginator.page(1)
+    except EmptyPage:
+        terminals = paginator.page(paginator.num_pages)
     data = {
         'terminals': terminals
     }

@@ -94,6 +94,19 @@
             {% endfor  %}
           </tbody>
         </table>
+        <div class="center">
+          <button class="btn btn-primary">
+            <span class="fa fa-chevron-left"></span>
+          </button>
+          {% for page in terminals.paginator.page_range %}
+            <a href="?page={{ page }}">
+              <button class="btn btn-default">{{ page }}</button>
+            </a>
+          {% endfor %}
+          <button class="btn btn-primary">
+            <span class="fa fa-chevron-right"></span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
