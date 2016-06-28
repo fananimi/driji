@@ -314,6 +314,14 @@ def terminal_detail(request, terminal_id):
 @login_required
 def student(request):
     students = User.objects.filter(user_type=User.USER_STUDENT)
+    paginator = Paginator(students, settings.PAGINATION_NUMBER)
+    page = request.GET.get('page')
+    try:
+        students = paginator.page(page)
+    except PageNotAnInteger:
+        students = paginator.page(1)
+    except EmptyPage:
+        students = paginator.page(paginator.num_pages)
     data = {
         'students': students
     }
