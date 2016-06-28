@@ -12,7 +12,7 @@ from django.views.decorators.http import require_http_methods as alowed
 
 from driji.forms import AddTerminalForm, EditTerminalForm, LoginForm, \
     ScanTerminalForm, StudentForm
-from driji.models import User
+from driji.models import User, PhoneBook
 
 from layang.models import Message
 
@@ -435,6 +435,16 @@ def sms(request):
         'list_sms': list_sms
     }
     return render(request, 'sms.html', data)
+
+
+@alowed(['GET'])
+@login_required
+def phonebook(request):
+    contacts = PhoneBook.objects.all()
+    data = {
+        'contacts': contacts
+    }
+    return render(request, 'phonebook.html', data)
 
 # @alowed(['GET'])
 # @login_required

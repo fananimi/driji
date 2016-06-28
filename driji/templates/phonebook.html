@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb navbar-breadcrumb">
+  <li class="active">
+    {% trans 'Terminal' %}
+  </li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<a href="{% url 'terminal_scan' %}">
+  <button type="button" name="button" class="btn btn-primary">
+      {% trans 'Add Terminal' %}
+  </button>
+</a>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+        <div class="title">
+          {% trans 'Terminal List' %}
+        </div>
+        </div>
+      </div>
+      <div class="card-body" style="margin-bottom: 80px;">
+        <table class="table table-striped" cellspacing="0" width="100%">
+          <thead>
+            <tr>
+              <th>{% trans 'Name' %}</th>
+              <th>{% trans 'Gender' %}</th>
+              <th>{% trans 'Type' %}</th>
+              <th>{% trans 'Phone Number' %}</th>
+              <th>{% trans 'Address' %}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for contact in contacts %}
+              <tr>
+                <td>{{ contact.driji_user.fullname }}</td>
+                <td>{{ contact.driji_user.gender_name }}</td>
+                <td>{{ contact.driji_user.gender_type_name }}</td>
+                <td>{{ contact.phone_number }}</td>
+                <td>{{ contact.address }}</td>
+              </tr>
+            {% endfor  %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block script %}
+  <script>
+    $('.zk_action').click(function(){
+      $(this).siblings('form').submit();
+    });
+  </script>
+{% endblock %}

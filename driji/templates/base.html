@@ -144,6 +144,11 @@
                     <span class="icon fa fa-hdd-o"></span><span class="title">{% trans 'Terminal' %}</span>
                   </a>
                 </li>
+                <li {% if request.path == '/phonebook/' %}class="active"{% endif %}>
+                  <a href="{% url 'phonebook' %}">
+                    <span class="icon fa fa-database"></span><span class="title">{% trans 'Phonebook' %}</span>
+                  </a>
+                </li>
                 <!-- <li>
                   <a href="#">
                     <span class="icon fa fa-database"></span><span class="title">{% trans 'Phone Book' %}</span>

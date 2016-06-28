@@ -53,6 +53,16 @@ class User(BaseModel, ZKBaseUser):
         elif self.gender == self.GENDER_FEMALE:
             return _('female')
 
+    def gender_type_name(self):
+        if self.user_type == self.USER_ADMINISTRATOR:
+            return _('Administrator')
+        if self.user_type == self.USER_STAFF:
+            return _('Staff')
+        if self.user_type == self.USER_PARENT:
+            return _('Parent')
+        if self.user_type == self.USER_STUDENT:
+            return _('Student')
+
     def __unicode__(self):
         return self.fullname
 
