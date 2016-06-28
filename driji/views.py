@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 import calendar
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import EmptyPage, PageNotAnInteger, Paginator
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils import timezone
@@ -441,6 +443,15 @@ def sms(request):
 @login_required
 def phonebook(request):
     contacts = PhoneBook.objects.all()
+    paginator = Paginator(contacts, settings.PAGINATION_NUMBER)
+    page = request.GET.get('page')
+    try:
+        contacts = paginator.page(page)
+    except PageNotAnInteger:
+        contacts = paginator.page(1)
+    except EmptyPage:
+        contacts = paginator.page(paginator.num_pages)
+
     data = {
         'contacts': contacts
     }

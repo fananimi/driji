@@ -126,6 +126,8 @@ LOGOUT_URL = '/logout/'
 
 ZK_USER_MODEL = 'driji.User'
 
+PAGINATION_NUMBER = 25
+
 try:
     # overide for local settings
     from settings_local import *

@@ -16,9 +16,9 @@
     <div class="card">
       <div class="card-header">
         <div class="card-title">
-        <div class="title">
-          {% trans 'Phonebook' %}
-        </div>
+          <div class="title">
+            {% trans 'Phonebook' %}
+          </div>
         </div>
       </div>
       <div class="card-body" style="margin-bottom: 80px;">
@@ -44,6 +44,19 @@
             {% endfor  %}
           </tbody>
         </table>
+        <div class="center">
+          <button class="btn btn-primary">
+            <span class="fa fa-chevron-left"></span>
+          </button>
+          {% for page in contacts.paginator.page_range %}
+            <a href="?page={{ page }}">
+              <button class="btn btn-default">{{ page }}</button>
+            </a>
+          {% endfor %}
+          <button class="btn btn-primary">
+            <span class="fa fa-chevron-right"></span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
