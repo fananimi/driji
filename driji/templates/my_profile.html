@@ -21,66 +21,72 @@
       </div>
       <div class="card-body">
         <div class="panel-body">
-            {% with request.user as user %}
-              <table class="table table-reflow">
-                <tbody>
-                  <tr>
-                    <th scope="row">
-                      {% trans 'Full name' %}
-                    </th>
-                    <td>
-                      {{ user.username }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      {% trans 'Full Name' %}
-                    </th>
-                    <td>
-                      {{ user.driji_user.fullname|default:"N/A" }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      {% trans 'User Type' %}
-                    </th>
-                    <td>
-                      {{ user.driji_user.user_type_name|default:"N/A" }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      {% trans 'Gender' %}
-                    </th>
-                    <td>
-                      {{ user.driji_user.gender_name|default:"N/A" }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      {% trans 'Address' %}
-                    </th>
-                    <td>
-                      {{ user.driji_user.ponebook.address|default:"N/A" }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      {% trans 'Phone Number' %}
-                    </th>
-                    <td>
-                      {{ user.driji_user.ponebook.phone_number|default:"N/A" }}
-                    </td>
-                  </tr>
-                  <tr>
-                    <th scope="row">
-                      {% trans 'Parent' %}
-                    </th>
-                    <td>
+          {% with request.user as user %}
+            <table class="table table-reflow">
+              <tbody>
+                <tr>
+                  <th scope="row">
+                    {% trans 'Full name' %}
+                  </th>
+                  <td>
+                    {{ user.username }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    {% trans 'Full Name' %}
+                  </th>
+                  <td>
+                    {{ user.driji_user.fullname|default:"N/A" }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    {% trans 'User Type' %}
+                  </th>
+                  <td>
+                    {{ user.driji_user.user_type_name|default:"N/A" }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    {% trans 'Gender' %}
+                  </th>
+                  <td>
+                    {{ user.driji_user.gender_name|default:"N/A" }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    {% trans 'Address' %}
+                  </th>
+                  <td>
+                    {{ user.driji_user.ponebook.address|default:"N/A" }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    {% trans 'Phone Number' %}
+                  </th>
+                  <td>
+                    {{ user.driji_user.ponebook.phone_number|default:"N/A" }}
+                  </td>
+                </tr>
+                <tr>
+                  <th scope="row">
+                    {% trans 'Parent' %}
+                  </th>
+                  <td>
+                    {% if user.driji_user.parent %}
+                      <a href="{% url 'profile' user.driji_user.parent.id %}">
+                        {{ user.driji_user.parent|default:"N/A" }}
+                      </a>
+                    {% else %}
                       {{ user.driji_user.parent|default:"N/A" }}
-                    </td>
-                  </tr>
-                </tbody>
+                    {% endif %}
+                  </td>
+                </tr>
+              </tbody>
             </table>
           {% endwith %}
         </div>

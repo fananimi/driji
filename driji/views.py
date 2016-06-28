@@ -36,6 +36,16 @@ def my_profile(request):
     return render(request, 'my_profile.html')
 
 
+@alowed(['GET'])
+@login_required
+def profile(request, user_id):
+    user = get_object_or_404(User, pk=user_id)
+    data = {
+        'user': user
+    }
+    return render(request, 'profile.html', data)
+
+
 @alowed(['GET', 'POST'])
 def login_view(request):
     user = request.user

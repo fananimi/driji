@@ -14,6 +14,7 @@ urlpatterns = [
     url(r"^logout/$", views.logout_views, name='logout'),
 
     url(r'^my/profile/$', views.my_profile, name='my_profile'),
+    url(r'^profile/(?P<user_id>[0-9]+)/$', views.profile, name='profile'),
 
     url(r'^terminal/$', views.terminal, name='terminal'),
     url(r'^terminal/scan/$', views.terminal_scan, name='terminal_scan'),

@@ -61,9 +61,17 @@
                       </span>
                     </div>
                   </th>
-                  <td>{{ student.fullname }}</td>
+                  <td>
+                    <a href="{% url 'profile' student.id %}">
+                      {{ student.fullname }}
+                    </a>
+                  </td>
                   <td>{{ student.gender_name }}</td>
-                  <td>{{ student.parent.fullname }}</td>
+                  <td>
+                    <a href="{% url 'profile' student.parent.id %}">
+                      {{ student.parent.fullname }}
+                    </a>
+                  </td>
                 </tr>
               {% endfor %}
             </tbody>
