@@ -61,6 +61,23 @@
               {% endfor %}
             </tbody>
           </table>
+          <strong>
+            Legend :
+          </strong>
+          <div class="row">
+            <div class="col-xs-3">
+              <button class="btn btn-xs btn-success">A</button> {% trans 'present' %}
+            </div>
+            <div class="col-xs-3">
+              <button class="btn btn-xs">A</button> {% trans 'absense' %}
+            </div>
+            <div class="col-xs-3">
+              <button class="btn btn-xs btn-warning">A</button> {% trans 'late' %}
+            </div>
+            <div class="col-xs-3">
+              <button class="btn btn-xs btn-danger">A</button> {% trans 'weekend/holiday' %}
+            </div>
+          </div>
         </div>
       </div>
     </div>
