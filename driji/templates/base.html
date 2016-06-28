@@ -134,17 +134,17 @@
                     <span class="icon fa fa-tachometer"></span><span class="title">{% trans 'Dashboard' %}</span>
                   </a>
                 </li>
-                <li {% if request.path == '/student/' %}class="active"{% endif %}>
+                <li {% if '/student/' in request.path %}class="active"{% endif %}>
                   <a href="{% url 'student' %}">
                     <span class="icon fa fa-graduation-cap"></span><span class="title">{% trans 'Student' %}</span>
                   </a>
                 </li>
-                <li {% if request.path == '/terminal/' %}class="active"{% endif %}>
+                <li {% if '/terminal/' in request.path %}class="active"{% endif %}>
                   <a href="{% url 'terminal' %}">
                     <span class="icon fa fa-hdd-o"></span><span class="title">{% trans 'Terminal' %}</span>
                   </a>
                 </li>
-                <li {% if request.path == '/phonebook/' %}class="active"{% endif %}>
+                <li {% if '/phonebook/' in request.path %}class="active"{% endif %}>
                   <a href="{% url 'phonebook' %}">
                     <span class="icon fa fa-database"></span><span class="title">{% trans 'Phonebook' %}</span>
                   </a>
@@ -154,7 +154,7 @@
                     <span class="icon fa fa-database"></span><span class="title">{% trans 'Phone Book' %}</span>
                   </a>
                 </li> -->
-                <li class="panel panel-default dropdown">
+                <li class="panel panel-default dropdown {% if '/attendance/' in request.path %}active{% endif %}">
                   <a data-toggle="collapse" href="#dropdown-atendance">
                     <span class="icon fa fa-clock-o"></span><span class="title">{% trans 'Attendance Report' %}</span>
                   </a>
