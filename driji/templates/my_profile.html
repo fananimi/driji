@@ -1,0 +1,117 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block breadcrumb %}
+<ol class="breadcrumb navbar-breadcrumb">
+  <li class="active">
+    {% trans 'My Profile' %}
+  </li>
+</ol>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+        <div class="title">{% trans 'My Profile' %}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="panel-body">
+            {% with request.user as user %}
+              <table class="table table-reflow">
+                <tbody>
+                  <tr>
+                    <th scope="row">
+                      {% trans 'Full name' %}
+                    </th>
+                    <td>
+                      {{ user.username }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {% trans 'Full Name' %}
+                    </th>
+                    <td>
+                      {{ user.driji_user.fullname|default:"N/A" }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {% trans 'User Type' %}
+                    </th>
+                    <td>
+                      {{ user.driji_user.user_type_name|default:"N/A" }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {% trans 'Gender' %}
+                    </th>
+                    <td>
+                      {{ user.driji_user.gender_name|default:"N/A" }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {% trans 'Address' %}
+                    </th>
+                    <td>
+                      {{ user.driji_user.ponebook.address|default:"N/A" }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {% trans 'Phone Number' %}
+                    </th>
+                    <td>
+                      {{ user.driji_user.ponebook.phone_number|default:"N/A" }}
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">
+                      {% trans 'Parent' %}
+                    </th>
+                    <td>
+                      {{ user.driji_user.parent|default:"N/A" }}
+                    </td>
+                  </tr>
+                </tbody>
+            </table>
+          {% endwith %}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">
+        <div class="title">{% trans 'Info' %}</div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="panel-body">
+          <p>
+            {% trans 'You need to configure the terminal network before save it to system.' %}
+          </p>
+          <img src="{% static 'img/zksoftware_device.jpg' %}" alt="" width="250px"/>
+        </div>
+        <div class="sub-title">{% trans 'How To Settings Network' %}</div>
+        <div class="panel-body">
+          <ol>
+            <li>{% trans 'Go to menu by holding the button <strong>OK</strong>' %}</li>
+            <li>{% trans 'Select menu <strong>Comm</strong>' %}</li>
+            <li>{% trans 'Select sub menu <strong>Network</strong>' %}</li>
+            <li>{% trans 'Fill the form and then press <strong>OK</strong>' %}</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

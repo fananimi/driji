@@ -53,7 +53,7 @@ class User(BaseModel, ZKBaseUser):
         elif self.gender == self.GENDER_FEMALE:
             return _('female')
 
-    def gender_type_name(self):
+    def user_type_name(self):
         if self.user_type == self.USER_ADMINISTRATOR:
             return _('Administrator')
         if self.user_type == self.USER_STAFF:
@@ -70,7 +70,7 @@ class User(BaseModel, ZKBaseUser):
 class PhoneBook(BaseModel):
     address = models.CharField(_('address'), max_length=200, blank=True, null=True)
     phone_number = models.CharField(_('phone number'), max_length=16, unique=True, db_index=True)
-    driji_user = models.ForeignKey(User, related_name='ponebooks')
+    driji_user = models.OneToOneField(User, related_name='ponebook')
 
     class Meta:
         db_table = 'driji_phonebook'

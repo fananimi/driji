@@ -30,6 +30,12 @@ def index(request):
     # return render(request, 'index.html')
 
 
+@alowed(['GET'])
+@login_required
+def my_profile(request):
+    return render(request, 'my_profile.html')
+
+
 @alowed(['GET', 'POST'])
 def login_view(request):
     user = request.user

@@ -195,6 +195,7 @@ class StudentForm(forms.Form):
     phone_number = forms.CharField(
         label=_('phone number'),
         max_length=16,
+        required=False,
         widget=forms.TextInput(attrs={
             'class': 'form-control'
         })
@@ -202,6 +203,7 @@ class StudentForm(forms.Form):
     address = forms.CharField(
         label=_('address'),
         max_length=200,
+        required=False,
         widget=forms.Textarea(attrs={
             'class': 'form-control',
             'rows': 3
@@ -226,6 +228,7 @@ class StudentForm(forms.Form):
     parent_phone_number = forms.CharField(
         label=_('phone number'),
         max_length=16,
+        required=False,
         widget=forms.TextInput(attrs={
             'class': 'form-control'
         })
@@ -233,6 +236,7 @@ class StudentForm(forms.Form):
     parent_address = forms.CharField(
         label=_('address'),
         max_length=200,
+        required=False,
         widget=forms.Textarea(attrs={
             'class': 'form-control',
             'rows': 3

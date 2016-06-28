@@ -10,8 +10,10 @@ urlpatterns = [
     url(r'^i18n/', include('django.conf.urls.i18n')),
 
     url(r'^$', views.index, name='index'),
-    url(r'^login/$', views.login_view),
-    url(r"^logout/$", views.logout_views, name="logout"),
+    url(r'^login/$', views.login_view, name='login'),
+    url(r"^logout/$", views.logout_views, name='logout'),
+
+    url(r'^my/profile/$', views.my_profile, name='my_profile'),
 
     url(r'^terminal/$', views.terminal, name='terminal'),
     url(r'^terminal/scan/$', views.terminal_scan, name='terminal_scan'),
