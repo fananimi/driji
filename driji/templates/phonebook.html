@@ -5,7 +5,7 @@
 {% block breadcrumb %}
 <ol class="breadcrumb navbar-breadcrumb">
   <li class="active">
-    {% trans 'Terminal' %}
+    {% trans 'Phonebook' %}
   </li>
 </ol>
 {% endblock %}
@@ -17,7 +17,7 @@
       <div class="card-header">
         <div class="card-title">
           <div class="title">
-            {% trans 'Phonebook' %}
+            {% trans 'Contact List' %}
           </div>
         </div>
       </div>
@@ -35,7 +35,11 @@
           <tbody>
             {% for contact in contacts %}
               <tr>
-                <td>{{ contact.driji_user.fullname }}</td>
+                <td>
+                  <a href="{% url 'profile' contact.driji_user.id %}">
+                    {{ contact.driji_user.fullname }}
+                  </a>
+                </td>
                 <td>{{ contact.driji_user.gender_name }}</td>
                 <td>{{ contact.driji_user.user_type_name }}</td>
                 <td>{{ contact.phone_number }}</td>
