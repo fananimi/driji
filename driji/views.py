@@ -12,7 +12,7 @@ from django.views.decorators.http import require_http_methods as alowed
 
 from driji.forms import AddTerminalForm, EditTerminalForm, LoginForm, \
     ScanTerminalForm, StudentForm
-from driji.models import User, PhoneBook
+from driji.models import PhoneBook, User
 
 from layang.models import Message
 
